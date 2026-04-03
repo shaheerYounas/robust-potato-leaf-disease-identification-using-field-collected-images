@@ -1,0 +1,344 @@
+================================================================================
+PROPOSED METHOD — Robust Potato Leaf Disease Identification
+Using Field-Collected Images Under Uncontrolled Conditions
+================================================================================
+Author:   Nabila Husna Shabrina
+Project:  UMN × Teesside University Internship 2026
+Framework: PyTorch 2.x + timm
+Date:     March 2026
+================================================================================
+
+
+1. PROBLEM STATEMENT & MOTIVATION
+================================================================================
+
+Deep learning approaches for plant disease detection report high accuracy on
+curated lab-environment datasets, but real-world agricultural deployment remains
+challenging due to uncontrolled environmental factors: variable lighting, complex
+backgrounds, partial occlusions, and heterogeneous disease symptom presentation.
+
+This project addresses that gap by training, benchmarking, and deploying robust
+models exclusively on a field-collected potato leaf disease dataset captured
+under uncontrolled conditions (7 classes, 3,076 images). The goal is not just
+high accuracy on clean data, but reliable performance under real-world
+variability — and a deployable system that can be used in the field.
+
+
+2. DATASET CHARACTERIZATION
+================================================================================
+
+Source:   Mendeley Data (https://data.mendeley.com/datasets/ptz377bwb8/1)
+Article:  https://www.sciencedirect.com/science/article/pii/S2352340923009861
+
+Classes (7):
+  - Bacteria:    569 images
+  - Fungi:       748 images (largest)
+  - Healthy:     201 images
+  - Nematode:     68 images (smallest — 11× imbalance)
+  - Pest:        611 images
+  - Phytopthora: 347 images
+  - Virus:       532 images
+
+Total: 3,076 images | Native resolution: 1500×1500 | Condition: uncontrolled field
+
+Key Challenges Identified via EDA:
+  - Severe class imbalance (11:1 ratio between Fungi and Nematode)
+  - Variable lighting conditions across samples
+  - Complex/cluttered backgrounds (soil, other leaves, shadows)
+  - Visually similar symptoms across some disease classes
+  - Varying leaf orientations, sizes, and occlusion levels
+
+
+3. PROPOSED ARCHITECTURE — HYBRID CNN-TRANSFORMER
+================================================================================
+
+The primary model is a Hybrid CNN-Transformer architecture chosen because:
+  - CNN backbone (EfficientNetB0) excels at extracting local spatial features
+    such as lesion texture, colour patterns, and edge boundaries
+  - Transformer encoder captures global contextual relationships across the
+    entire leaf image — critical for distinguishing diseases that present similar
+    local patterns but differ in spatial distribution
+  - This hybrid approach is specifically suited for uncontrolled images where
+    disease symptoms may appear anywhere on the leaf and background noise
+    requires global context to filter out
+
+Architecture:
+
+  Input Image (224×224×3)
+         |
+  EfficientNetB0 Backbone (pretrained on ImageNet, transfer learning)
+         |  output: 7×7×1280 feature maps
+  Reshape → Patch Sequence (49 patches × 1280 features)
+         |
+  Lightweight Transformer Encoder
+    - 2 encoder layers
+    - 8-head multi-head self-attention
+    - Feed-forward network (dim=2048)
+    - LayerNorm + Dropout (0.2)
+         |
+  Global Average Pooling → 1280-dim vector
+         |
+  Dense(256, ReLU) + Dropout(0.3)
+         |
+  Dense(7, Softmax)
+         |
+  Predicted Class: Bacteria | Fungi | Healthy | Nematode | Pest | Phytopthora | Virus
+
+Why EfficientNetB0:
+  - Compound scaling balances depth, width, and resolution efficiently
+  - Small enough for edge deployment, strong enough for transfer learning
+  - Proven feature extraction on ImageNet generalizes well to plant imagery
+
+Why Transformer Encoder (not full ViT):
+  - Full Vision Transformer requires large datasets (>>3K images)
+  - Using CNN features as input patches avoids the ViT data-hunger problem
+  - Lightweight (2 layers) keeps training feasible and prevents overfitting
+
+
+4. BASELINE MODELS FOR COMPARATIVE BENCHMARKING
+================================================================================
+(Project Focus Area #1: Comparative benchmarking of CNN vs Vision Transformer)
+
+To demonstrate the Hybrid model's value, three baselines will be trained and
+compared under identical conditions:
+
+  Baseline A — Simple CNN (from scratch)
+    - 3 convolutional blocks, no pretrained weights
+    - Purpose: lower bound; shows the benefit of transfer learning
+
+  Baseline B — EfficientNetB0 (frozen backbone)
+    - Pretrained backbone frozen, only classification head trained
+    - Purpose: shows transfer learning value with minimal compute
+
+  Baseline C — EfficientNetB0 (fine-tuned)
+    - Last 2 blocks unfrozen, trained end-to-end at lower LR
+    - Purpose: strong CNN-only baseline to compare against Hybrid
+
+  Primary Model — Hybrid CNN-Transformer
+    - Phase 1: frozen backbone, train Transformer + head (60 epochs)
+    - Phase 2: unfreeze last 2 backbone blocks, fine-tune (30 epochs)
+
+All models compared on: Accuracy, Precision, Recall, F1-Score (macro + per-class),
+inference latency, and model size.
+
+
+5. PREPROCESSING & DATA AUGMENTATION STRATEGY
+================================================================================
+
+5.1 Preprocessing Pipeline
+  - Resize all images to 224×224 (EfficientNet standard input)
+  - Normalize using ImageNet statistics (mean=[0.485, 0.456, 0.406],
+    std=[0.229, 0.224, 0.225]) — aligned with pretrained EfficientNet weights
+  - Framework: PyTorch torchvision transforms (not TensorFlow ImageDataGenerator)
+
+5.2 Dataset Splitting
+  - Stratified 80/20 train/validation split for benchmarking phase
+  - Final evaluation: 70/15/15 train/validation/test split with held-out test set
+    that is never touched during training or hyperparameter tuning
+
+5.3 Class Balancing via Targeted Oversampling
+  - Applied ONLY to underrepresented classes until all classes reach ~748 images
+  - Preserves all original images; augments only minorities
+  - Balanced dataset: ~5,236 images (748 per class × 7 classes)
+
+5.4 Baseline Augmentations (Phase 2)
+  - Random rotation (±20°)
+  - Random horizontal flip
+  - Width/height shift (±10%)
+  - Random zoom (±20%)
+
+5.5 Advanced Augmentations (Phase 3 — Robustness)
+  - Brightness/contrast jitter (simulates variable field lighting)
+  - Gaussian noise injection (simulates sensor noise)
+  - Random erasing (simulates partial occlusion)
+  - MixUp (alpha=0.2) — blends two images to improve generalization
+  - CutMix (beta=1.0) — pastes patches between images to reduce overfitting
+  - Color jitter (hue, saturation shifts — simulates camera variation)
+
+  Rationale: The dataset is from uncontrolled field conditions. These augmentations
+  simulate the real-world degradations the model will face during deployment.
+
+
+6. TRAINING CONFIGURATION
+================================================================================
+
+  Optimizer:          Adam (lr=1e-4 frozen phase, lr=1e-5 fine-tune phase)
+  LR Schedule:        ReduceLROnPlateau (patience=5, factor=0.5)
+                      Phase 3: Cosine annealing with linear warm-up (5 epochs)
+  Loss Function:      CrossEntropyLoss with label smoothing (0.1)
+  Class Weights:      Phase 3: inverse-frequency class weights if minority
+                      classes underperform after oversampling
+  Early Stopping:     Patience=10-12 epochs, monitoring validation loss
+  Checkpointing:      Save best model by validation accuracy (torch.save)
+  Batch Size:         32
+  Epochs:             50-60 per training phase
+  Hardware:           GPU recommended (training on CPU is feasible but slow)
+
+
+7. ROBUSTNESS ANALYSIS STRATEGY
+================================================================================
+(Project Focus Area #2: Robustness under real-world noise and background variation)
+
+This is the core differentiator of the project. The model must prove it works
+under conditions that break lab-trained models.
+
+7.1 Synthetic Degradation Testing
+  Generate degraded versions of validation images and measure accuracy drop:
+
+  Degradation Type          Simulation Method
+  ─────────────────         ────────────────────────────────────
+  Gaussian blur             cv2.GaussianBlur (kernel 5-15)
+  Low-light / dark          Reduce brightness by 40-60%
+  Overexposure              Increase brightness by 40-60%
+  Gaussian noise            Add noise (sigma=10-30)
+  Partial occlusion         Random black rectangles (20-40% area)
+  Cluttered background      Composite leaf onto noisy background
+
+7.2 Robustness Metrics
+  - Per-degradation accuracy and F1 drop (vs clean baseline)
+  - Target: < 15% accuracy drop under any single degradation
+  - Combined degradation worst-case analysis
+
+7.3 Domain-Aware Training Improvements
+  If robustness is poor:
+  - Retrain with advanced augmentation (Section 5.5)
+  - Add domain-specific augmentation (e.g., leaf shape masks)
+  - Try training with CutMix/MixUp enabled
+
+
+8. EXPLAINABLE AI (XAI)
+================================================================================
+(Project Focus Area #4: Grad-CAM, Score-CAM for disease prediction transparency)
+
+Explainability is critical for agricultural adoption — farmers and agronomists
+need to trust that the model is looking at disease symptoms, not background noise.
+
+8.1 Grad-CAM (Gradient-weighted Class Activation Mapping)
+  - Hook into the last convolutional layer of EfficientNetB0 backbone
+  - Generate heatmaps showing which image regions drive the prediction
+  - Produce 5 sample heatmaps per class (35 total visualizations)
+
+8.2 Score-CAM
+  - Gradient-free alternative — uses forward passes with masked inputs
+  - More stable heatmaps, useful as comparison to Grad-CAM
+
+8.3 Qualitative Analysis
+  - Do heatmaps focus on lesion/disease regions or background?
+  - Are correct vs incorrect predictions looking at different regions?
+  - Compare Grad-CAM vs Score-CAM quality and consistency
+
+8.4 Deliverables
+  - Saliency maps per class saved as PNG files
+  - XAI comparison grid: original → Grad-CAM → Score-CAM
+  - Written analysis for inclusion in report
+
+
+9. EDGE OPTIMIZATION & LIGHTWEIGHT DEPLOYMENT
+================================================================================
+(Project Focus Area #3: Lightweight or optimized models for edge/mobile deployment)
+
+9.1 ONNX Export
+  - Convert best PyTorch model to ONNX format (torch.onnx.export)
+  - Verify output consistency: PyTorch vs ONNX predictions match
+
+9.2 Post-Training Quantization
+  - Apply INT8 quantization via ONNX Runtime
+  - Compare: full model vs quantized on accuracy, size, and latency
+
+9.3 Deployment Benchmarks
+  Metric              Target
+  ──────              ──────
+  Inference latency   < 200ms per image (CPU)
+  Model size (ONNX)   < 50MB
+  Accuracy drop       < 2% after quantization
+  Memory usage        < 500MB RAM
+
+
+10. END-TO-END DEPLOYMENT PIPELINE
+================================================================================
+(Project Focus Area #5: Image input → prediction → visualization)
+
+10.1 CLI Inference Script (predict.py)
+  - Input: image file path
+  - Output: predicted class, confidence score, Grad-CAM overlay
+  - Supports both PyTorch and ONNX backends
+
+10.2 Streamlit Web Application (app.py)
+  - File uploader: accept JPG/PNG images
+  - Display input image alongside prediction results
+  - Show top-3 class predictions with confidence bar chart
+  - Toggle Grad-CAM heatmap overlay
+  - Display disease description and treatment recommendations
+  - Responsive, user-friendly interface
+
+10.3 Disease Information Lookup
+  Static dictionary mapping each class to:
+  - Disease name and cause (pathogen type)
+  - Visual symptoms description
+  - Recommended treatment / management strategies
+  - Severity level
+
+
+11. EVALUATION FRAMEWORK
+================================================================================
+
+11.1 Classification Metrics (per model)
+  - Overall accuracy
+  - Per-class precision, recall, F1-score
+  - Macro-averaged F1-score (primary comparison metric)
+  - Confusion matrix visualization
+
+11.2 Benchmarking Comparison Table
+  Model                     | Accuracy | Macro-F1 | Params | Size | Latency
+  ──────────────────────────|──────────|──────────|────────|──────|────────
+  Baseline A (Simple CNN)   |          |          |        |      |
+  Baseline B (EffNet frozen)|          |          |        |      |
+  Baseline C (EffNet fine)  |          |          |        |      |
+  Hybrid CNN-Transformer    |          |          |        |      |
+  Hybrid Optimized (Phase 3)|          |          |        |      |
+  ONNX Quantized            |          |          |        |      |
+
+11.3 Statistical Validation
+  - McNemar's test between top-2 models for statistical significance
+  - 5-fold cross-validation on final model (time permitting)
+
+11.4 Target Metrics
+  Metric              Target
+  ──────              ──────
+  Overall accuracy    > 85%
+  Macro F1-score      > 0.80
+  Min per-class F1    > 0.70 (including Nematode)
+  Inference latency   < 200ms (CPU)
+  Robustness drop     < 15% accuracy under degradation
+
+
+12. EXPECTED DELIVERABLES
+================================================================================
+(Aligned with project guidelines)
+
+  1. Fully trained and evaluated disease detection models (4 baselines + optimized)
+  2. Deployable inference system (Streamlit web app + CLI tool)
+  3. Technical internship report (25-35 pages)
+  4. Journal-type research paper (IEEE/MDPI format)
+  5. Reusable deployment pipeline (ONNX + Streamlit + predict.py)
+  6. Technical documentation (README, docstrings, deployment guide)
+  7. All code, models, results archived and reproducible
+
+
+13. TIMELINE ALIGNMENT
+================================================================================
+
+  Phase   Duration        Activities
+  ─────   ────────        ──────────
+  1       2 weeks         Literature review & dataset EDA (COMPLETED)
+  2       4-6 weeks       Model benchmarking & baseline experiments
+  3       4-6 weeks       Robustness improvement, XAI, edge optimization
+  4       4 weeks         Deployment pipeline (predict.py + Streamlit app)
+  5       3-4 weeks       Final evaluation, reports, documentation
+
+  Total:  ~17-22 weeks (March 1 – July 19, 2026)
+
+
+================================================================================
+END OF PROPOSED METHOD
+================================================================================

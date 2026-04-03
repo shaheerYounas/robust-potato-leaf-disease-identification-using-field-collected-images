@@ -1,0 +1,116 @@
+===============================================================
+  SETUP GUIDE — Bilal Advance Practice (GPU Machine)
+  Date: March 8, 2026
+===============================================================
+
+WHAT TO COPY FROM USB
+---------------------------------------------------------------
+Copy the entire "Bilal-Advance Practice" project folder to the
+new machine. It contains:
+  - Notebook/Advance_Practice_Phase_2.ipynb
+  - artifacts/
+  - data/         <-- paste your dataset folder here (see step 6)
+  - outputs/
+  - docs/
+  - requirements.txt
+
+Do NOT copy the .venv folder — it is machine-specific.
+
+
+STEP-BY-STEP SETUP
+---------------------------------------------------------------
+
+STEP 1 — Check your GPU driver / CUDA version
+  Open a terminal (CMD or PowerShell) and run:
+
+    nvidia-smi
+
+  Look at the top-right corner for:  CUDA Version: X.X
+  Note this number — you will need it in Step 3.
+
+
+STEP 2 — Make sure Python is installed
+  Run:
+    python --version
+
+  You need Python 3.10 or higher.
+  Download from: https://www.python.org/downloads/
+  (tick "Add Python to PATH" during install)
+
+
+STEP 3 — Create a virtual environment
+  Open a terminal inside the project folder and run:
+
+    python -m venv .venv
+    .venv\Scripts\activate
+
+
+STEP 4 — Install PyTorch WITH CUDA support
+  Choose the command that matches your CUDA version from Step 1:
+
+  >> CUDA 12.1  (most modern GPUs — RTX 30xx, 40xx series):
+    pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 --index-url https://download.pytorch.org/whl/cu121
+
+  >> CUDA 11.8  (older GPUs — GTX 10xx, 16xx, RTX 20xx series):
+    pip install torch==2.1.0+cu118 torchvision==0.16.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+
+  After installing, verify GPU is detected:
+    python -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))"
+  It should print:  True  and your GPU name.
+
+
+STEP 5 — Install all other packages
+  (Make sure the .venv is still activated from Step 3)
+
+    pip install -r requirements.txt
+
+
+STEP 6 — Place the dataset in the correct folder
+  Copy the dataset folder from your USB and place it here:
+
+    Bilal-Advance Practice\
+      data\
+        raw\
+          Potato Leaf Disease Dataset in Uncontrolled Environment\
+            Potato Leaf Disease Dataset in Uncontrolled Environment\
+              Bacteria\
+              Fungi\
+              Healthy\
+              Nematode\
+              Pest\
+              Phytopthora\
+              Virus\
+
+  The notebook expects EXACTLY this folder structure and name.
+
+
+STEP 7 — Register the kernel for VS Code / Jupyter
+  Run:
+
+    python -m ipykernel install --user --name bilal-env --display-name "Bilal GPU Env"
+
+
+STEP 8 — Open the notebook in VS Code
+  1. Open VS Code in the project folder.
+  2. Install the "Jupyter" extension if not already installed.
+  3. Open:  Notebook/Advance_Practice_Phase_2.ipynb
+  4. Click "Select Kernel" (top-right) → "Bilal GPU Env"
+  5. Run all cells from the top (Cell menu → Run All).
+
+  The Phase 2 Setup cell will print your GPU name and memory,
+  confirming everything is working correctly.
+
+
+QUICK CHECKLIST
+---------------------------------------------------------------
+  [ ] nvidia-smi runs and shows CUDA Version
+  [ ] Python 3.10+ installed
+  [ ] .venv created and activated
+  [ ] PyTorch installed with correct CUDA version (torch.cuda.is_available() = True)
+  [ ] pip install -r requirements.txt completed with no errors
+  [ ] Dataset folder placed at correct path (Step 6)
+  [ ] ipykernel registered (Step 7)
+  [ ] Notebook opens and "Bilal GPU Env" kernel is selected
+  [ ] First few cells run successfully and GPU is detected
+
+===============================================================

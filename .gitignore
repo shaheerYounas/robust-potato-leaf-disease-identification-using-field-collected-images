@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Python / notebooks
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Large local datasets (not suitable for normal GitHub repo history)
+data/raw/
+data/processed/
+
+# Optional local experiment clutter
+*.log

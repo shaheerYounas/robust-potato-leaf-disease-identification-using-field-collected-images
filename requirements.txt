@@ -1,0 +1,55 @@
+# ── Core scientific stack ──────────────────────────────────────────────────────
+numpy==2.4.2
+pandas==3.0.1
+scipy==1.17.0
+scikit-learn==1.8.0
+
+# ── Image processing ───────────────────────────────────────────────────────────
+opencv-python==4.13.0.92
+pillow==12.1.1
+albumentations==2.0.8
+
+# ── Deep learning (install PyTorch separately — see README below) ──────────────
+# torch and torchvision are intentionally excluded.
+# Install them with CUDA support using the command in INSTALL NOTES below.
+timm==1.0.25
+
+# ── Visualisation ─────────────────────────────────────────────────────────────
+matplotlib==3.10.8
+seaborn==0.13.2
+
+# ── Notebook / kernel ─────────────────────────────────────────────────────────
+ipykernel==7.2.0
+ipython==9.11.0
+jupyter_client==8.8.0
+jupyter_core==5.9.1
+tqdm==4.67.3
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+huggingface_hub==1.5.0
+safetensors==0.7.0
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INSTALL NOTES FOR GPU MACHINE
+# ──────────────────────────────────────────────────────────────────────────────
+# 1. Create & activate a virtual environment:
+#      python -m venv .venv
+#      .venv\Scripts\activate          (Windows)
+#
+# 2. Install PyTorch WITH CUDA (choose the line matching your GPU driver):
+#
+#    CUDA 12.1  (most common on modern GPUs):
+#      pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 --index-url https://download.pytorch.org/whl/cu121
+#
+#    CUDA 11.8  (older GPUs / drivers):
+#      pip install torch==2.1.0+cu118 torchvision==0.16.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+#
+#    To check your driver's max supported CUDA version run:
+#      nvidia-smi
+#    Look for "CUDA Version: X.X" in the top-right corner.
+#
+# 3. Install all other packages from this file:
+#      pip install -r requirements.txt
+#
+# 4. Register the kernel for VS Code / Jupyter:
+#      python -m ipykernel install --user --name bilal-env --display-name "Bilal GPU Env"

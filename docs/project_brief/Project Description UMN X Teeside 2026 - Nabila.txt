@@ -1,0 +1,81 @@
+﻿About the Project 
+
+Robust Potato Leaf Disease Identification  
+Using Field-Collected Images 
+
+Nabila Husna Shabrina 
+Universitas Multimedia Nusantara, Indonesia 
+﻿Project Background 
+
+  Deep  learning  approaches for  plant  disease  detection  often  report  high  accuracy when  
+  trained  and  tested  on  curated  datasets.  However,  real-world  agricultural  deployment  
+  remains   challenging   due   to   uncontrolled   environmental  factors   such   as   variable  
+  lighting,  complex     backgrounds,     partial   occlusions,   and    heterogeneous      disease  
+  symptoms. 
+
+  This  internship  project focuses  on  leveraging  an  existing,  novel  dataset  of  potato  leaf  
+  diseases  collected  under  uncontrolled  field  conditions.  The  primary  objective  is  to  
+  analyze,  benchmark,  and  deploy  robust  AI  models  capable  of  performing  reliably  in  
+  real-world  scenarios.  Unlike  many  dataset-centric  projects,  no  new  data  collection  is  
+  required;  students will work  exclusively with the  provided  dataset  and focus  on  model  
+  performance,  robustness, and deployment readiness. 
+﻿ Project Objectives 
+
+1.  Conduct  a  focused  literature  review  on  potato  leaf  disease  detection  and  related  plant  
+    disease  datasets,  with  particular  attention  to  datasets  collected  in  uncontrolled  or  real- 
+    world environments, to  position the  provided dataset within existing  research. 
+2.  Analyze and characterize the existing  potato  leaf disease dataset  captured  in  uncontrolled  
+    field  conditions,   including    class  distribution,   visual  variability,  and   environmental  
+    complexity. 
+3.  Develop and  benchmark deep  learning  models for  potato  leaf  disease  classification  and/or  
+    localization using the  provided dataset. 
+4.  Enhance    model    robustness    through    data  augmentation,     architecture   selection,   and  
+    domain-aware training strategies suited for  real-world agricultural imagery. 
+5.  Deploy  the  trained  model  within  a  practical  inference  pipeline  suitable  for   real-world  
+    use.Evaluate  deployment  performance,  considering  accuracy,  inference  latency,  resource  
+    usage, and  usability. 
+﻿ Technical Focus Areas 
+
+Dataset that will  be  used: https://data.mendeley.com/datasets/ptz377bwb8/1  
+Article about the data:  https://www.sciencedirect.com/science/article/pii/S2352340923009861#refdata001  
+
+     Students may focus on one or more of the following: 
+
+      1. Comparative benchmarking of CNN vs Vision Transformer models 
+     2.  Robustness analysis under real-world noise and background variation 
+     3.  Lightweight or optimized models for edge or mobile deployment 
+     4.  Explainable AI (Grad-CAM, Score-CAM) for disease prediction transparency 
+     5.  End-to-end inference pipelines (image input → prediction → visualization) 
+     6.  Cross-dataset generalization analysis 
+﻿     Requirements 
+
+Mandatory 
+•  Python programming 
+•  Deep learning fundamentals 
+•  Experience with PyTorch or TensorFlow 
+Preferred 
+•  Computer vision and CNNs 
+•  Model deployment (Flask, FastAPI, Streamlit, ONNX, or TensorRT) 
+•  GPU-based training experience 
+﻿ Expected Outcomes 
+
+1.  A fully trained and evaluated disease detection model 
+2. A deployable inference system (demo or prototype)Technical internship  
+   report 
+3. Journal type-report  
+4. Reusable deployment pipeline for future agricultural AI applications 
+5. Technical documentations 
+﻿            Timeline 
+
+Phase       Activities                                 Duration (approx.) 
+            Literature review & dataset  
+Phase 1                                                2 weeks 
+            understanding 
+            Model benchmarking & baseline  
+Phase 2                                                4–6 weeks 
+            experiments 
+Phase 3     Robustness improvement & optimization      4–6 weeks 
+Phase 4     Deployment pipeline development            4 weeks 
+            Evaluation, documentation & research  
+Phase 5                                                3–4 weeks 
+            write-up 

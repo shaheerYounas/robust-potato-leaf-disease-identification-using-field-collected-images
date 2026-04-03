@@ -1,0 +1,8 @@
+class,original,augmented_added,total_after
+Bacteria,569,179,748
+Fungi,748,0,748
+Healthy,201,547,748
+Nematode,68,680,748
+Pest,611,137,748
+Phytopthora,347,401,748
+Virus,532,216,748

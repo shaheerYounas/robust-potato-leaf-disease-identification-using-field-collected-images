@@ -1,0 +1,8 @@
+class,num_images,height_mean,height_min,height_max,width_mean,width_min,width_max,blurry_count,blurry_pct,mean_V_brightness,std_V_brightness,imbalance_ratio
+Fungi,748,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Pest,611,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Bacteria,569,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Virus,532,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Phytopthora,347,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Healthy,201,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0
+Nematode,68,1500.0,1500,1500,1500.0,1500,1500,,,,,11.0

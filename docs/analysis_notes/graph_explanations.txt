@@ -1,0 +1,246 @@
+========================================================
+  EDA GRAPHS -- SIMPLE EXPLANATIONS
+  Potato Leaf Disease Dataset (Uncontrolled Environment)
+========================================================
+
+--------------------------------------------------------
+GRAPH 1 - 01_class_distribution.png
+         "How many images are in each disease category?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A bar chart. Each bar is one disease type (Fungi, Pest,
+  Bacteria, etc.). The height of the bar tells you how
+  many photos exist for that disease.
+
+WHAT IT MEANS:
+  The bars are very unequal. Fungi has 748 photos but
+  Nematode has only 68. This huge gap is a problem -- if
+  you train an AI on this data, it will barely learn what
+  Nematode looks like because it has seen so few examples.
+
+
+  "Some diseases are very well represented in the dataset,
+   others are barely there, the data is imbalanced."
+
+--------------------------------------------------------
+GRAPH 2 -- 02_image_size_distribution.png
+         "Are all photos the same size?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A histogram (bar chart of counts) showing the width and
+  height of every image in the dataset.
+
+WHAT IT MEANS:
+  All 3,076 images are exactly 1500 x 1500 pixels. There
+  is only one bar and it covers all images -- no variation.
+
+
+  "Every single photo is the same size, so we only need
+   one simple resize step before training."
+
+--------------------------------------------------------
+GRAPH 3 -- 03_pixel_intensity_histogram.png
+         "How bright or dark are the photos overall?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A histogram of pixel brightness values (0 = black,
+  255 = white). It shows how many pixels fall into each
+  brightness level across ALL images.
+
+WHAT IT MEANS:
+  The curve sits in the middle range (not too dark, not
+  too bright). There are no peaks near 0 (pitch black)
+  or 255 (completely washed out). This is good -- it
+  means lighting conditions are reasonably consistent.
+
+  "The photos are neither too dark nor too bright --
+   the lighting is fairly consistent across the dataset."
+
+--------------------------------------------------------
+GRAPH 4 -- 04_sample_images.png
+         "What do the actual leaf photos look like?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A grid of real photos -- 5 random images from each of
+  the 7 disease classes, so 35 photos total.
+
+WHAT IT MEANS:
+  You can see with your own eyes what each disease looks
+  like. Some photos are clear and sharp; others look
+  blurry or have messy backgrounds with soil and stems.
+  This is exactly what "uncontrolled environment" means --
+  the photos were taken in real fields, not a lab.
+
+
+  "Real field photos -- some are clear, some are blurry,
+   taken in natural messy conditions."
+
+--------------------------------------------------------
+GRAPH 5 -- 05_blur_distribution.png
+         "How blurry are the photos?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A histogram showing a "blur score" (called Laplacian
+  variance) for every image. A LOW score means very blurry;
+  a HIGH score means sharp and clear. The dashed red line
+  marks the threshold we set (score = 100) -- anything
+  below that line is considered blurry.
+
+WHAT IT MEANS:
+  A large chunk of images piles up on the left (low scores),
+  meaning 41.7% of all photos are blurry. This is a serious
+  problem because a blurry photo does not show the disease
+  features clearly -- the AI cannot learn properly from it.
+
+
+  "Nearly half the dataset is blurry, which will hurt
+   model accuracy if not fixed before training."
+
+--------------------------------------------------------
+GRAPH 6 -- 06_class_imbalance.png
+         "How unequal are the class sizes? (percentage view)"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A bar chart showing each class as a percentage of the
+  total dataset, making it easy to compare their shares.
+
+WHAT IT MEANS:
+  Fungi takes up 24% of the data; Nematode takes up just
+  2.2%. The imbalance ratio is 11x -- meaning the biggest
+  class has 11 times more photos than the smallest.
+  Any AI trained on this will be biased towards predicting
+  the common diseases and will miss the rare ones.
+
+
+  "The biggest class is 11 times larger than the smallest --
+   the dataset is severely imbalanced."
+
+--------------------------------------------------------
+GRAPH 7 -- 08_background_complexity.png
+         "How messy or busy are the photo backgrounds?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  Two bar charts side by side.
+  Left: Background variance -- how much visual "noise"
+        (soil, stems, other plants) is in the background.
+  Right: Edge density -- how many sharp edges/lines exist
+         in the image (leaves with complex textures score
+         high here).
+
+WHAT IT MEANS:
+  Bacteria photos have the most cluttered backgrounds
+  (variance = 3,712) -- lots of distracting background
+  detail. Healthy and Phytopthora leaves have the most
+  edges, meaning their texture is complex and detailed.
+  Complex backgrounds make it harder for AI to focus on
+  the leaf itself.
+
+
+  "Some disease classes have very messy backgrounds which
+   can confuse the model during training."
+
+--------------------------------------------------------
+GRAPH 8 -- 09_hsv_brightness_analysis.png
+         "Is brightness consistent across all disease types?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A box plot. Each box represents one disease class. The
+  box shows where most brightness values sit; the lines
+  (whiskers) show the full range; dots are outliers.
+
+WHAT IT MEANS:
+  All boxes are at roughly the same height and similar
+  size. This means brightness does not vary much between
+  classes -- the photos were all taken under similar
+  lighting. The standard deviation is only 15.27
+  (on a 0-255 scale), which is very low.
+
+
+  "Lighting is almost the same across all disease types --
+   brightness is not a problem in this dataset."
+
+--------------------------------------------------------
+GRAPH 9 -- 09b_saturation_vs_brightness.png
+         "Are vivid green photos brighter than dull ones?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A scatter plot. Each dot is one image. The X-axis is
+  Saturation (how vivid/colourful the leaf looks -- deep
+  green vs pale or yellowed). The Y-axis is Brightness
+  (how light or dark the photo is). Dots are colour-coded
+  by disease class.
+
+WHAT IT MEANS:
+  The dots form a loose cloud with no strong pattern.
+  High saturation does not automatically mean high
+  brightness -- they move somewhat independently.
+  This tells us that colour vividness and photo brightness
+  are two different signals the AI can use separately.
+
+
+  "Colourful leaves are not necessarily brighter ones --
+   colour and brightness carry independent information."
+
+--------------------------------------------------------
+INLINE CHART A -- RGB Channel Bar Chart (Section 2)
+         "Which colour channel is strongest in the photos?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  Three bars: Blue, Green, Red -- showing the average
+  pixel value for each colour channel across all images.
+  The error bars show how much variation there is.
+
+WHAT IT MEANS:
+  Green is clearly the tallest bar (mean = 139) because
+  leaves are green. Blue is the lowest (101) because the
+  sky and shadows add blue but leaves themselves don't.
+  All three error bars are small -- the colour balance
+  is consistent across photos.
+
+
+  "Green dominates as expected for leaf images -- colour
+   balance is stable across the whole dataset."
+
+--------------------------------------------------------
+INLINE CHART B -- Blurry % per Class Bar Chart (Section 3)
+         "Which disease type has the most blurry photos?"
+--------------------------------------------------------
+WHAT IT SHOWS:
+  A horizontal bar chart. Each bar is a disease class.
+  Bar length = percentage of photos in that class that
+  are blurry. Red bars = above 40% blurry (problem zone).
+
+WHAT IT MEANS:
+  Nematode is the worst: 70.6% of its photos are blurry.
+  Fungi (43.5%) and Bacteria (47.3%) are also in the
+  red zone. These classes need the most cleanup --
+  blurry images should be removed or filtered before
+  training the AI.
+
+
+  "Nematode, Fungi, and Bacteria have the most blurry
+   photos -- these classes need the most cleaning."
+
+========================================================
+  SUMMARY -- KEY PROBLEMS TO DISCUSS
+========================================================
+
+  1. IMBALANCE (most urgent)
+     Nematode has only 68 photos vs Fungi's 748.
+     The AI will strongly favour common diseases.
+     Fix: use weighted loss, oversample rare classes.
+
+  2. BLURRY IMAGES (very important)
+     41.7% of photos are too blurry to learn from.
+     Fix: remove the worst images before training.
+
+  3. COMPLEX BACKGROUNDS (moderate)
+     Bacteria and Fungi photos have cluttered backgrounds.
+     Fix: use background augmentation techniques.
+
+  4. GOOD NEWS
+     - All images are the same size (1500x1500) -- easy.
+     - Lighting is consistent -- no exposure correction.
+     - Green channel signal is strong and clean.
+
+========================================================

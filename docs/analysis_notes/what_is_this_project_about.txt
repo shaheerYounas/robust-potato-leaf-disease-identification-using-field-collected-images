@@ -1,0 +1,14 @@
+From the brief in Project Description UMN X Teeside 2026 - Nabila.pdf and the structure in Final Report Template.docx, this is an applied AI/computer vision research project with a prototype deployment component. The topic is potato leaf disease identification using an existing real-world field dataset, and the expected work is to review literature, analyze the dataset, benchmark models, improve robustness, and build a usable inference demo.
+
+This looks most like a final-year undergraduate capstone / internship thesis project, not a small course assignment. My inference is based on the scope: multi-phase timeline, model benchmarking, deployment, technical documentation, and a journal-style final paper with standard sections like abstract, introduction, literature review, methods, results, discussion, conclusion, and references. The report template also expects a fairly serious academic write-up: about 5,000 to 7,000 words, APA 7, and at least 15 references. That is usually senior-level university work.
+
+What students usually do for a project like this:
+
+Start with a focused literature review on plant disease detection and real-world agricultural image datasets.
+Explore the provided dataset carefully: class balance, image quality, lighting variation, background noise, and label structure.
+Build 2 to 4 baseline models, usually CNNs like ResNet/EfficientNet/MobileNet, and sometimes one Vision Transformer for comparison.
+Train, validate, and compare them using metrics like accuracy, precision, recall, F1-score, and confusion matrix.
+Add robustness improvements such as augmentation, class balancing, transfer learning, regularization, and image preprocessing.
+Pick one best model and deploy it as a simple demo, usually with Streamlit, Flask, FastAPI, or ONNX.
+Write the final work as a journal-style research report, not just a software project report.
+The most common successful version of this project is: “compare a few deep learning models on the potato leaf dataset, improve the best one for real-world robustness, then deploy it in a simple app.” That is the safest and most normal student scope here.

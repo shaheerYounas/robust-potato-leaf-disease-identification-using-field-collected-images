@@ -15,6 +15,7 @@ This folder summarizes the work that already exists in the workspace or is stron
 - `docs/literature_review/Literature Review.docx`
 - `docs/literature_review/Summary_Literature_Review.docx`
 - `docs/literature_review/Research Papers 19-36.docx`
+- Literature review research and source gathering are complete
 
 ### EDA and dataset audit
 
@@ -30,6 +31,9 @@ This folder summarizes the work that already exists in the workspace or is stron
 - EfficientNetB0 frozen
 - EfficientNetB0 fine-tuned
 - Hybrid CNN-Transformer
+- Benchmark summary metrics extracted in notebook outputs
+- Classification reports generated in notebook-backed outputs
+- Confusion matrices generated in notebook-backed outputs
 
 ## Evidence Locations
 
@@ -41,4 +45,4 @@ This folder summarizes the work that already exists in the workspace or is stron
 ## Important Note
 
 Some work is complete scientifically but not yet complete operationally in the local workspace.
-For example, model comparisons exist in notebook outputs, but the corresponding local CSVs, plots, and checkpoints are still incomplete.
+For example, literature review research is complete but not yet written into the final report, and model comparisons exist in notebook outputs while the corresponding local CSVs, plots, and checkpoints are still incomplete.

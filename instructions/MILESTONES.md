@@ -9,28 +9,34 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 - Audit date: 2026-04-03
 - Workspace root: `C:\Users\Shaheer\Desktop\Bilal-Advance Practice`
 - Project level: final-year undergraduate internship / capstone style AI project
+- Mandatory workflow rule:
+  - All code-related project work must stay in the existing main notebook: `Advance_Practice_Potato_Leaf.ipynb`.
 - Main reality check:
-  - Core EDA is complete.
-  - Core benchmarking was completed in notebook form.
-  - The local workspace is not yet fully synchronized with all Colab/Drive results.
+  - Literature review research is complete, but the final written report section is still pending.
+  - Core EDA is complete and already strong enough for project use.
+  - Core benchmarking and model comparison were completed in notebook form.
+  - The strongest project evidence currently lives inside the main notebook.
   - Robustness, XAI, deployment, and final report packaging are still largely remaining.
+  - The project is now in the finalization stage, not the early experimentation stage.
 
 ## Progress Summary
 
 | Area | Status | Estimated Progress | Notes |
 |---|---|---:|---|
 | Project definition and planning | Complete | 90% | Brief, template, proposed method, and planning documents exist |
-| Literature review | Strong | 70% | Review notes and summaries exist, but not yet merged into final report |
-| Dataset understanding and EDA | Complete | 95% | EDA plots and summary CSV exist locally |
-| Preprocessing and balancing | Strong | 80% | Balanced augmented dataset and preprocessing summary exist |
-| Model benchmarking (scientific work) | Strong | 85% | Benchmark results exist in notebook outputs |
-| Model benchmarking (workspace packaging) | Partial | 45% | Local scripts/results package is still missing |
+| Literature review research | Complete | 100% | Research reading and synthesis work is done; report-ready writing is still pending |
+| Literature review write-up | Not started | 15% | Source material exists, but it has not yet been turned into the final document section |
+| Dataset understanding and EDA | Complete | 95% | EDA plots and summary CSV exist locally; only selective strengthening/report integration remains |
+| Preprocessing and balancing | Strong | 85% | Balanced augmented dataset and preprocessing summary exist |
+| Model benchmarking (scientific work) | Strong | 90% | Four-model benchmark results exist in notebook outputs with classification reports and confusion matrices |
+| Model benchmarking (workspace packaging) | Partial | 60% | Notebook/Drive evidence is strong, but the local final package is still incomplete |
+| Final-quality evaluation | In progress | 70% | Model comparison is strong, but no locked final test protocol, robustness suite, or XAI yet |
 | Robustness analysis | Not started | 5% | Problem identified through EDA, but no degradation experiments yet |
 | Explainability | Not started | 0% | No Grad-CAM or Score-CAM files yet |
 | Deployment | Not started | 0% | No `predict.py`, no `app.py`, no ONNX pipeline |
-| Final report and submission packaging | Early stage | 25% | Background material exists, full report does not |
-| Overall project progress | In progress | 45% | Good middle-stage project |
-| Submission-ready workspace | In progress | 35% | Strong raw material, incomplete final package |
+| Final report and submission packaging | Early stage | 30% | Background material exists, but the actual integrated report and clean package are still pending |
+| Overall project progress | In progress | 70% | Research, EDA, and benchmarking are mostly complete; finalization work remains |
+| Submission-ready workspace | In progress | 50% | Strong raw material and notebook evidence exist, but the final deliverable package is incomplete |
 
 ## Evidence Already Present
 
@@ -58,6 +64,10 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 - Local artifact present:
   - `artifacts/phase_2_benchmarking/models/baseline_cnn_best.pt`
   - `artifacts/phase_2_benchmarking/metrics/preprocessing_summary.csv`
+- Notebook evidence also shows:
+  - classification reports saved to Drive-backed `phase2/metrics/`
+  - confusion matrices saved to Drive-backed `phase2/plots/`
+  - benchmarking summary saved to Drive-backed `phase2/metrics/benchmarking_results.csv`
 
 ### Benchmark results observed in notebook outputs
 
@@ -91,7 +101,7 @@ Exit criteria:
 
 ### M2. Literature review and problem framing
 
-Status: Strong
+Status: Research complete, writing pending
 
 Completed:
 
@@ -99,9 +109,11 @@ Completed:
 - [x] Identify dataset gap between controlled and field-collected imagery
 - [x] Identify model trends: CNNs, transfer learning, hybrids, transformers
 - [x] Record deployment/reproducibility gaps in prior work
+- [x] Finish the research-side literature review work
 
 Remaining:
 
+- [ ] Convert the completed research notes into report-ready academic writing
 - [ ] Merge the best literature findings into the final report structure
 - [ ] Clean out irrelevant papers from the final narrative
 - [ ] Convert literature summary into report-ready citations and arguments
@@ -128,6 +140,7 @@ Remaining:
 
 - [ ] Fold the strongest plots and findings into the final report
 - [ ] Decide which 4-6 figures are final-report worthy
+- [ ] Optionally add only high-value extras such as error-focused analysis or stronger split justification if needed
 
 Exit criteria:
 
@@ -145,9 +158,10 @@ Completed:
 
 Remaining:
 
-- [ ] Convert preprocessing pipeline from notebook code into a standalone script or module
+- [ ] Clean and organize the preprocessing pipeline inside the main notebook for reproducible reruns
 - [ ] Freeze exact split logic for reproducible reruns
 - [ ] Decide final train/val/test policy for final evaluation
+- [ ] Make the final evaluation split policy explicit in the report
 
 Exit criteria:
 
@@ -155,7 +169,7 @@ Exit criteria:
 
 ### M5. Baseline benchmarking
 
-Status: Strong but not fully packaged
+Status: Strong scientifically, not fully packaged for submission
 
 Completed:
 
@@ -164,18 +178,43 @@ Completed:
 - [x] Train and evaluate EfficientNetB0 fine-tuned
 - [x] Train and evaluate Hybrid CNN-Transformer
 - [x] Compare models on accuracy, F1, and latency in notebook outputs
+- [x] Produce classification reports and confusion matrices in notebook-backed outputs
+- [x] Establish a strong candidate best-model path from benchmarking results
 
 Remaining:
 
-- [ ] Export benchmark tables from notebook into local CSV files
+- [ ] Export benchmark tables from notebook/Drive into local project CSV files
 - [ ] Save local copies of classification reports
 - [ ] Save local copies of confusion matrices and training curves
 - [ ] Sync final model checkpoints from Colab/Drive into local workspace
-- [ ] Refactor notebook code into reusable training and evaluation scripts
+- [ ] Decide and document the final selected model for the report
+- [ ] Clean and structure notebook sections so training and evaluation can be rerun from the same notebook
 
 Exit criteria:
 
 - Benchmarking results exist locally as scripts, model files, CSVs, and plots
+
+### M5b. Final evaluation quality
+
+Status: In progress
+
+Completed:
+
+- [x] Run meaningful model comparison across four model families
+- [x] Evaluate accuracy and macro-F1
+- [x] Measure latency for model comparison
+
+Remaining:
+
+- [ ] Define a locked final evaluation protocol
+- [ ] Confirm whether current reported numbers are validation-only or final-test numbers in the final narrative
+- [ ] Add robustness evidence
+- [ ] Add explainability evidence
+- [ ] Turn notebook evaluation outputs into report-ready tables and figures
+
+Exit criteria:
+
+- Final evaluation is defensible in the report, not only strong inside notebook outputs
 
 ### M6. Robustness improvement
 
@@ -239,7 +278,7 @@ Exit criteria:
 
 ### M9. Final evaluation and reporting
 
-Status: Early stage
+Status: Writing not started, evidence collection strong
 
 Completed:
 
@@ -263,13 +302,13 @@ Exit criteria:
 
 These are the highest-value tasks to do next.
 
-1. Sync all completed Phase 2 results from notebook/Drive into the local workspace.
-2. Convert the current notebook pipeline into standalone scripts for preprocessing, training, and evaluation.
-3. Freeze the best model choice for the final project baseline.
+1. Freeze and document the final best model choice using the existing benchmark evidence.
+2. Sync all completed Phase 2 results from notebook/Drive into the local workspace.
+3. Define the final evaluation protocol clearly: validation, held-out test, or both.
 4. Run robustness experiments on the selected best model.
 5. Implement Grad-CAM.
-6. Build the simplest possible deployment path with `predict.py` and Streamlit.
-7. Start the final report while experiments continue.
+6. Start writing the final report, beginning with literature review, methods, and benchmark results.
+7. Build the simplest possible deployment path with `predict.py` and Streamlit.
 
 ## Nice To Have, Not Core
 

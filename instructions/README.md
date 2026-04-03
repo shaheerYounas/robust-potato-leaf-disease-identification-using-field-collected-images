@@ -22,3 +22,9 @@ This folder is the project control center for planning, reference material, and 
 
 The dataset, notebooks, outputs, and artifacts stay in their existing technical locations so code paths do not break.
 These new folders organize the project from a management and submission perspective.
+
+## Mandatory Working Rule
+
+All project code-related tasking must be done in one Jupyter notebook, which is the notebook already in use: `Advance_Practice_Potato_Leaf.ipynb`.
+This includes preprocessing, model training, evaluation, robustness experiments, and other core model execution work.
+Do not move the main workflow into multiple standalone code files unless the project rule is explicitly revised.

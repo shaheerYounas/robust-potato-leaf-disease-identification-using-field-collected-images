@@ -1,7 +1,7 @@
 # Robust Potato Leaf Disease Identification Using Field-Collected Images Under Uncontrolled Conditions
 
 ## Abstract
-Accurate plant disease recognition in laboratory-style datasets does not automatically translate into strong performance under real agricultural conditions. This study investigates potato leaf disease classification using a field-collected dataset captured in uncontrolled environments. The dataset contains 3,076 images across seven classes and presents several practical challenges, including severe class imbalance, blur, and cluttered backgrounds. To address these issues, a balanced training strategy was applied by augmenting minority classes to match the largest class, producing a balanced set of 5,236 training images. Four models were benchmarked: a baseline CNN, EfficientNetB0 with a frozen backbone, EfficientNetB0 with fine-tuning, and a Hybrid CNN-Transformer. The Hybrid CNN-Transformer achieved the strongest observed performance with 0.9292 accuracy and 0.9373 macro-F1, outperforming the other benchmarked models under the current project evidence. These findings suggest that combining convolutional local feature extraction with transformer-based contextual modeling is effective for disease recognition in uncontrolled field imagery. The work also prepares final-stage robustness, explainability, and deployment components to strengthen practical deployment readiness.
+Accurate plant disease recognition in laboratory-style datasets does not automatically translate into strong performance under real agricultural conditions. This study investigates potato leaf disease classification using a field-collected dataset captured in uncontrolled environments. The dataset contains 3,076 images across seven classes and presents several practical challenges, including severe class imbalance, blur, and cluttered backgrounds. To address these issues, a balanced training strategy was applied by augmenting minority classes to match the largest class, producing a balanced set of 5,236 training images. Four models were benchmarked: a baseline CNN, EfficientNetB0 with a frozen backbone, EfficientNetB0 with fine-tuning, and a Hybrid CNN-Transformer. In the current saved local benchmark artifact, the Hybrid CNN-Transformer achieved the strongest macro-F1 at 0.8319 while the fine-tuned EfficientNetB0 achieved the highest accuracy at 0.8317. These findings suggest that combining convolutional local feature extraction with transformer-based contextual modeling is effective for disease recognition in uncontrolled field imagery. The work also prepares final-stage robustness, explainability, and deployment components to strengthen practical deployment readiness.
 
 Keywords:
 potato leaf disease, deep learning, EfficientNetB0, transformer, plant disease detection, field-collected images
@@ -36,16 +36,16 @@ Four models were evaluated:
 The benchmark compared models using accuracy, macro-F1, and latency. Macro-F1 was treated as a particularly important metric because of the dataset imbalance and the need to judge performance more fairly across all classes.
 
 ## 3. Results
-The benchmark results showed a clear progression from the weakest baseline toward stronger transfer-learning and hybrid approaches. The baseline CNN achieved 0.6507 accuracy and 0.6544 macro-F1, which indicates that training from scratch is insufficient for this dataset. EfficientNetB0 with a frozen backbone improved performance to 0.7496 accuracy and 0.7382 macro-F1. Fine-tuning EfficientNetB0 produced a substantial jump to 0.9209 accuracy and 0.9294 macro-F1.
+The benchmark results showed a clear progression from the weakest baseline toward stronger transfer-learning and hybrid approaches. The baseline CNN achieved 0.6405 accuracy and 0.6372 macro-F1, which indicates that training from scratch is insufficient for this dataset. EfficientNetB0 with a frozen backbone improved performance to 0.6977 accuracy and 0.6763 macro-F1. Fine-tuning EfficientNetB0 produced a substantial jump to 0.8317 accuracy and 0.8195 macro-F1.
 
-The best observed result came from the Hybrid CNN-Transformer, which achieved 0.9292 accuracy and 0.9373 macro-F1. This model also maintained practical inference speed, although it was slower than the frozen and fine-tuned EfficientNet variants. The benchmark summary is shown below.
+The best observed result under the current macro-F1-first ranking came from the Hybrid CNN-Transformer, which achieved 0.8301 accuracy and 0.8319 macro-F1. This model also maintained practical inference speed, although it was slower than the frozen and fine-tuned EfficientNet variants. The benchmark summary is shown below.
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) |
 |---|---:|---:|---:|
-| Baseline CNN | 0.6507 | 0.6544 | 162.86 |
-| EfficientNetB0 (frozen) | 0.7496 | 0.7382 | 69.83 |
-| EfficientNetB0 (fine-tuned) | 0.9209 | 0.9294 | 78.00 |
-| Hybrid CNN-Transformer | 0.9292 | 0.9373 | 109.32 |
+| Baseline CNN | 0.6405 | 0.6372 | 1.060 |
+| EfficientNetB0 (frozen) | 0.6977 | 0.6763 | 1.211 |
+| EfficientNetB0 (fine-tuned) | 0.8317 | 0.8195 | 1.167 |
+| Hybrid CNN-Transformer | 0.8301 | 0.8319 | 1.436 |
 
 ## 4. Discussion
 The results indicate that pretrained visual features are essential for potato leaf disease identification in uncontrolled field imagery. The gap between the baseline CNN and the transfer-learning models shows that simple end-to-end training from scratch is not enough for this dataset. The further gain from fine-tuned EfficientNetB0 suggests that task-specific adjustment of pretrained representations is highly beneficial.
@@ -55,7 +55,7 @@ The strongest result from the Hybrid CNN-Transformer supports the view that glob
 Despite these strong results, the study still requires fully finalized robustness, explainability, and deployment evidence for full submission readiness. The project workflow has already been extended to include dedicated notebook sections for these tasks, but their outputs should be treated as pending final execution until the saved artifacts are generated.
 
 ## 5. Conclusion
-This study demonstrates that strong potato leaf disease classification performance can be achieved on field-collected images captured under uncontrolled conditions. Exploratory analysis showed that the dataset is realistically difficult because it combines class imbalance, blur, and background complexity. Among the four benchmarked models, the Hybrid CNN-Transformer achieved the best observed overall performance, with 0.9292 accuracy and 0.9373 macro-F1. These findings suggest that hybrid CNN-transformer designs are promising for practical disease recognition in agricultural environments. Future work should finalize robustness evaluation, Grad-CAM interpretation, and deployment packaging to strengthen the model’s practical readiness for real-world use.
+This study demonstrates that meaningful potato leaf disease classification performance can be achieved on field-collected images captured under uncontrolled conditions. Exploratory analysis showed that the dataset is realistically difficult because it combines class imbalance, blur, and background complexity. Among the four benchmarked models, the Hybrid CNN-Transformer achieved the best observed macro-F1 in the current local artifact, with 0.8301 accuracy and 0.8319 macro-F1, while the fine-tuned EfficientNetB0 slightly led on raw accuracy. These findings suggest that hybrid CNN-transformer designs are promising for practical disease recognition in agricultural environments. Future work should finalize robustness evaluation, Grad-CAM interpretation, and deployment packaging to strengthen the model's practical readiness for real-world use.
 
 ## Notes For Final Journal Version
 - Add formal citations from the literature review files.

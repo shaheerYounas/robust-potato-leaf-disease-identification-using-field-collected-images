@@ -1,6 +1,6 @@
 # Report Tables
 
-These tables are ready to copy into the report and can be updated later if the notebook generates refined values.
+These tables are ready to copy into the report and can be updated later if notebook Sections 7 to 11 generate refined values.
 
 ## Table 1. Raw Dataset Class Distribution
 
@@ -35,23 +35,22 @@ Source:
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) |
 |---|---:|---:|---:|
-| Baseline CNN | 0.6507 | 0.6544 | 162.86 |
-| EfficientNetB0 (frozen) | 0.7496 | 0.7382 | 69.83 |
-| EfficientNetB0 (fine-tuned) | 0.9209 | 0.9294 | 78.00 |
-| Hybrid CNN-Transformer | 0.9292 | 0.9373 | 109.32 |
+| Baseline CNN | 0.6405 | 0.6372 | 1.060 |
+| EfficientNetB0 (frozen) | 0.6977 | 0.6763 | 1.211 |
+| EfficientNetB0 (fine-tuned) | 0.8317 | 0.8195 | 1.167 |
+| Hybrid CNN-Transformer | 0.8301 | 0.8319 | 1.436 |
 
 Source:
-- `instructions/MILESTONES.md`
-- audited notebook outputs referenced in the workspace tracker
+- `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv`
 
 ## Table 4. Current Best Model Statement
 
 | Criterion | Current Best Model | Reason |
 |---|---|---|
-| Accuracy | Hybrid CNN-Transformer | Highest observed accuracy |
+| Accuracy | EfficientNetB0 (fine-tuned) | Highest observed accuracy in the current local benchmark artifact |
 | Macro-F1 | Hybrid CNN-Transformer | Highest observed macro-F1 |
-| Latency | EfficientNetB0 (frozen) | Lowest observed inference latency |
-| Balanced research choice | Hybrid CNN-Transformer | Best overall classification quality under current evidence |
+| Latency | Baseline CNN | Lowest measured inference latency in the current local benchmark artifact |
+| Balanced research choice | Hybrid CNN-Transformer | Highest macro-F1 under the current macro-F1-first ranking rule |
 
 ## Table 5. Robustness Results Placeholder
 

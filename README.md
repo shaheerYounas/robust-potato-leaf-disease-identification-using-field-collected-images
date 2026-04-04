@@ -8,7 +8,7 @@ The project is now in the finalization stage.
 
 - Literature review research is complete, but the final written report section is still pending.
 - Dataset analysis and EDA are strong and mostly complete.
-- Model benchmarking and comparison are strong in notebook evidence.
+- Model benchmarking and comparison are strong in the saved local artifacts and notebook workflow.
 - The main remaining work is final evaluation framing, robustness, explainability, deployment, and report packaging.
 
 Current practical status:
@@ -45,4 +45,5 @@ Do not split the core project workflow into separate training scripts unless thi
 ## GitHub Repository Note
 
 The GitHub repository excludes `data/raw/` and `data/processed/` from version control because the image datasets are too large for a normal repository.
+Larger EfficientNet and Hybrid checkpoint files are also kept local-only because they exceed normal GitHub file-size limits.
 The project still includes notebooks, documentation, outputs, setup instructions, and lightweight artifacts needed to understand and reproduce the work structure.

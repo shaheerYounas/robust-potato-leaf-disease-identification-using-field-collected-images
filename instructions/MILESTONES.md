@@ -6,7 +6,7 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 
 ## Audit Snapshot
 
-- Audit date: 2026-04-03
+- Audit date: 2026-04-04
 - Workspace root: `C:\Users\Shaheer\Desktop\Bilal-Advance Practice`
 - Project level: final-year undergraduate internship / capstone style AI project
 - Mandatory workflow rule:
@@ -14,8 +14,8 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 - Main reality check:
   - Literature review research is complete, but the final written report section is still pending.
   - Core EDA is complete and already strong enough for project use.
-  - Core benchmarking and model comparison were completed in notebook form.
-  - The strongest project evidence currently lives inside the main notebook.
+  - Core benchmarking and model comparison were completed and synced into local artifacts.
+  - The strongest project evidence lives in the main notebook plus the saved local benchmark artifacts.
   - Robustness, XAI, deployment, and final report packaging are still largely remaining.
   - The project is now in the finalization stage, not the early experimentation stage.
 
@@ -28,8 +28,8 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 | Literature review write-up | Not started | 15% | Source material exists, but it has not yet been turned into the final document section |
 | Dataset understanding and EDA | Complete | 95% | EDA plots and summary CSV exist locally; only selective strengthening/report integration remains |
 | Preprocessing and balancing | Strong | 85% | Balanced augmented dataset and preprocessing summary exist |
-| Model benchmarking (scientific work) | Strong | 90% | Four-model benchmark results exist in notebook outputs with classification reports and confusion matrices |
-| Model benchmarking (workspace packaging) | Partial | 60% | Notebook/Drive evidence is strong, but the local final package is still incomplete |
+| Model benchmarking (scientific work) | Strong | 90% | Four-model benchmark results exist with saved local metrics, reports, curves, and confusion matrices |
+| Model benchmarking (workspace packaging) | Strong | 85% | Benchmark CSVs, reports, plots, and checkpoints are now present locally; large checkpoints remain local-only due to GitHub limits |
 | Final-quality evaluation | In progress | 70% | Model comparison is strong, but no locked final test protocol, robustness suite, or XAI yet |
 | Robustness analysis | Not started | 5% | Problem identified through EDA, but no degradation experiments yet |
 | Explainability | Not started | 0% | No Grad-CAM or Score-CAM files yet |
@@ -61,22 +61,24 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 
 - Main notebook: `Advance_Practice_Potato_Leaf.ipynb`
 - Local phase-2 notebook: `Notebook/Advance_Practice_Phase_2.ipynb`
-- Local artifact present:
-  - `artifacts/phase_2_benchmarking/models/baseline_cnn_best.pt`
+- Local artifacts present:
+  - `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv`
   - `artifacts/phase_2_benchmarking/metrics/preprocessing_summary.csv`
-- Notebook evidence also shows:
-  - classification reports saved to Drive-backed `phase2/metrics/`
-  - confusion matrices saved to Drive-backed `phase2/plots/`
-  - benchmarking summary saved to Drive-backed `phase2/metrics/benchmarking_results.csv`
+  - `artifacts/phase_2_benchmarking/metrics/classification_report_*.txt`
+  - `artifacts/phase_2_benchmarking/plots/*.png`
+  - `artifacts/phase_2_benchmarking/models/*_train_state.json`
+  - local checkpoint files for Baseline, EfficientNet, and Hybrid models
+- Repository note:
+  - the larger EfficientNet and Hybrid `.pt` checkpoints are stored locally but excluded from normal Git history because of GitHub file-size limits
 
-### Benchmark results observed in notebook outputs
+### Benchmark results observed in current local artifacts
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) | Status |
 |---|---:|---:|---:|---|
-| Baseline CNN | 0.6507 | 0.6544 | 162.86 | Completed in notebook |
-| EfficientNetB0 frozen | 0.7496 | 0.7382 | 69.83 | Completed in notebook |
-| EfficientNetB0 fine-tune | 0.9209 | 0.9294 | 78.00 | Completed in notebook |
-| Hybrid CNN-Transformer | 0.9292 | 0.9373 | 109.32 | Completed in notebook |
+| Baseline CNN | 0.6405 | 0.6372 | 1.060 | Saved locally |
+| EfficientNetB0 frozen | 0.6977 | 0.6763 | 1.211 | Saved locally |
+| EfficientNetB0 fine-tune | 0.8317 | 0.8195 | 1.167 | Saved locally |
+| Hybrid CNN-Transformer | 0.8301 | 0.8319 | 1.436 | Saved locally |
 
 ## Milestones
 
@@ -169,7 +171,7 @@ Exit criteria:
 
 ### M5. Baseline benchmarking
 
-Status: Strong scientifically, not fully packaged for submission
+Status: Strong and locally packaged
 
 Completed:
 
@@ -177,16 +179,16 @@ Completed:
 - [x] Train and evaluate EfficientNetB0 frozen
 - [x] Train and evaluate EfficientNetB0 fine-tuned
 - [x] Train and evaluate Hybrid CNN-Transformer
-- [x] Compare models on accuracy, F1, and latency in notebook outputs
-- [x] Produce classification reports and confusion matrices in notebook-backed outputs
+- [x] Compare models on accuracy, F1, and latency
+- [x] Produce classification reports and confusion matrices
 - [x] Establish a strong candidate best-model path from benchmarking results
+- [x] Export benchmark tables into local project CSV files
+- [x] Save local copies of classification reports
+- [x] Save local copies of confusion matrices and training curves
+- [x] Sync final model checkpoints into the local workspace
 
 Remaining:
 
-- [ ] Export benchmark tables from notebook/Drive into local project CSV files
-- [ ] Save local copies of classification reports
-- [ ] Save local copies of confusion matrices and training curves
-- [ ] Sync final model checkpoints from Colab/Drive into local workspace
 - [ ] Decide and document the final selected model for the report
 - [ ] Clean and structure notebook sections so training and evaluation can be rerun from the same notebook
 
@@ -214,7 +216,7 @@ Remaining:
 
 Exit criteria:
 
-- Final evaluation is defensible in the report, not only strong inside notebook outputs
+- Final evaluation is defensible in the report, not only strong inside notebook cells
 
 ### M6. Robustness improvement
 
@@ -302,13 +304,13 @@ Exit criteria:
 
 These are the highest-value tasks to do next.
 
-1. Freeze and document the final best model choice using the existing benchmark evidence.
-2. Sync all completed Phase 2 results from notebook/Drive into the local workspace.
-3. Define the final evaluation protocol clearly: validation, held-out test, or both.
-4. Run robustness experiments on the selected best model.
-5. Implement Grad-CAM.
-6. Start writing the final report, beginning with literature review, methods, and benchmark results.
-7. Build the simplest possible deployment path with `predict.py` and Streamlit.
+1. Define and document the final evaluation protocol clearly: validation, held-out test, or both.
+2. Freeze the final best-model choice using the current local benchmark artifacts.
+3. Run notebook Sections 7 to 11 in the intended GPU environment.
+4. Generate robustness outputs for the selected best model.
+5. Generate Grad-CAM outputs.
+6. Confirm deployment and ONNX export status.
+7. Continue writing the final report using the saved local benchmark artifacts plus the new Section 7 to 11 outputs.
 
 ## Nice To Have, Not Core
 

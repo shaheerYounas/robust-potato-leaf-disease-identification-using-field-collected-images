@@ -17,8 +17,9 @@ The strongest current technical evidence is still centered in:
 ## What Is Already Available
 - raw dataset under `data/raw/`
 - EDA outputs under `outputs/`
-- benchmark preprocessing summary under `artifacts/phase_2_benchmarking/metrics/`
-- baseline CNN checkpoint under `artifacts/phase_2_benchmarking/models/`
+- benchmark CSVs, histories, and classification reports under `artifacts/phase_2_benchmarking/metrics/`
+- confusion matrices and training curves under `artifacts/phase_2_benchmarking/plots/`
+- local model checkpoints under `artifacts/phase_2_benchmarking/models/`
 - project trackers and audit documents under `instructions/`, `completed/`, and `submission_ready/`
 - internship and journal-style draft writing under `docs/report_drafts/`
 
@@ -39,7 +40,6 @@ The notebook now includes sections for:
 ## Current Gaps
 The following items still need to be completed or refreshed for a full final package:
 - execute notebook Sections 7 to 11 and save the new artifacts
-- sync all final model checkpoints locally
 - generate final robustness CSV and figure outputs
 - generate Grad-CAM figure outputs
 - confirm deployment export status, including ONNX
@@ -61,9 +61,9 @@ Because of that, the final notebook execution should be done in the intended GPU
 ## Recommended Next Run Sequence
 1. Prepare the GPU environment from `SETUP_ON_GPU_MACHINE.txt`.
 2. Open `Advance_Practice_Potato_Leaf.ipynb`.
-3. Run the notebook through benchmarking if the required checkpoints are not already available.
+3. Reuse the already saved local benchmark artifacts unless you intentionally want a fresh benchmark rerun.
 4. Run notebook Sections 7 to 11 to generate final evaluation, robustness, explainability, deployment, and report-ready outputs.
-5. Update the report drafts using the saved notebook results.
+5. Update the report drafts using the saved local benchmark artifacts plus the new Section 7 to 11 outputs.
 
 ## Report Files To Start From
 - `docs/report_drafts/internship_report_draft.md`
@@ -74,3 +74,6 @@ Because of that, the final notebook execution should be done in the intended GPU
 
 ## Honest Readiness Summary
 The project is no longer in an early experimentation phase. The scientific core is mostly in place, but full submission readiness still depends on final artifact generation, environment alignment, and final report packaging.
+
+Repository note:
+- large EfficientNet and Hybrid checkpoint files are kept locally but excluded from normal GitHub history because of file-size limits

@@ -1,0 +1,15 @@
+Classification Report — EfficientNetB0 (frozen)
+=======================================================
+              precision    recall  f1-score   support
+
+    Bacteria     0.8527    0.9735    0.9091       113
+       Fungi     0.7203    0.5705    0.6367       149
+     Healthy     0.3962    0.5250    0.4516        40
+    Nematode     0.5789    0.8462    0.6875        13
+        Pest     0.6379    0.6066    0.6218       122
+ Phytopthora     0.6500    0.7536    0.6980        69
+       Virus     0.7629    0.6981    0.7291       106
+
+    accuracy                         0.6977       612
+   macro avg     0.6570    0.7105    0.6763       612
+weighted avg     0.7036    0.6977    0.6959       612

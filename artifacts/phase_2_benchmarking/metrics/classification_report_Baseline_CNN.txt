@@ -1,0 +1,15 @@
+Classification Report — Baseline CNN
+=======================================================
+              precision    recall  f1-score   support
+
+    Bacteria     0.8661    0.8584    0.8622       113
+       Fungi     0.6818    0.5034    0.5792       149
+     Healthy     0.3200    0.6000    0.4174        40
+    Nematode     0.6190    1.0000    0.7647        13
+        Pest     0.6706    0.4672    0.5507       122
+ Phytopthora     0.5056    0.6522    0.5696        69
+       Virus     0.6750    0.7642    0.7168       106
+
+    accuracy                         0.6405       612
+   macro avg     0.6197    0.6922    0.6372       612
+weighted avg     0.6676    0.6405    0.6419       612

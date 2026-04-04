@@ -1,0 +1,15 @@
+Classification Report — Hybrid CNN-Transformer
+=======================================================
+              precision    recall  f1-score   support
+
+    Bacteria     0.9487    0.9823    0.9652       113
+       Fungi     0.7485    0.8389    0.7911       149
+     Healthy     0.6818    0.7500    0.7143        40
+    Nematode     1.0000    0.8462    0.9167        13
+        Pest     0.8416    0.6967    0.7623       122
+ Phytopthora     0.7838    0.8406    0.8112        69
+       Virus     0.8980    0.8302    0.8627       106
+
+    accuracy                         0.8301       612
+   macro avg     0.8432    0.8264    0.8319       612
+weighted avg     0.8349    0.8301    0.8298       612

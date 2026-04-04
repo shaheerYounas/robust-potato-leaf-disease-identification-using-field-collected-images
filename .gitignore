@@ -15,5 +15,11 @@ venv/
 data/raw/
 data/processed/
 
+# Large local model artifacts and notebook-generated deployment exports
+artifacts/**/models/*_best.pt
+!artifacts/phase_2_benchmarking/models/baseline_cnn_best.pt
+Potato_Leaf_Disease_Storage/
+*.onnx
+
 # Optional local experiment clutter
 *.log

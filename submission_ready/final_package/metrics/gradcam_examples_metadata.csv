@@ -1,0 +1,7 @@
+image_path,true_label,predicted_label,confidence
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Bacteria\20230816_142405.jpg,Bacteria,Bacteria,0.8791
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Fungi\IMG_20230816_114803.jpg,Fungi,Fungi,0.8937
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Healthy\20230815_121157.jpg,Healthy,Healthy,0.9268
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Nematode\20230712_154725.jpg,Nematode,Nematode,0.9449
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Pest\IMG_0304.JPG,Pest,Pest,0.8284
+C:\Users\Shaheer\Desktop\Bilal-Advance Practice\data\raw\Potato Leaf Disease Dataset in Uncontrolled Environment\Potato Leaf Disease Dataset in Uncontrolled Environment\Phytopthora\IMG_0351.JPG,Phytopthora,Phytopthora,0.9062

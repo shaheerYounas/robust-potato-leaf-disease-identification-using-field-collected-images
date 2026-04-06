@@ -1,0 +1,6 @@
+Condition,Accuracy,Macro F1,Macro Precision,Macro Recall,Latency (ms/image),Accuracy Drop vs Clean,F1 Drop vs Clean
+Clean Validation Images,0.9308,0.9384,0.9371,0.9406,1.338,0.0,0.0
+Gaussian Blur,0.9242,0.9366,0.9346,0.9392,1.337,0.0066,0.0018
+Low Light,0.8451,0.8411,0.8345,0.8618,1.337,0.0857,0.0973
+Gaussian Noise,0.9325,0.9397,0.9374,0.9432,1.339,-0.0017,-0.0013
+Center Occlusion,0.883,0.8964,0.8971,0.8983,1.337,0.0478,0.042

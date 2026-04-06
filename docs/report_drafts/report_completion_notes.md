@@ -1,30 +1,37 @@
 # Report Completion Notes
 
-This note tracks what still needs to be refreshed or inserted after the latest notebook sections are executed.
+This note now reflects the post-packaging state of the project.
 
-## Already strong enough to write now
-- Project motivation and problem framing
-- Dataset description and class distribution
-- EDA interpretation
-- Preprocessing and balancing description
-- Benchmark comparison across the four trained models
-- Discussion of why the hybrid model is the strongest current candidate
+## Final notebook outputs now packaged locally
 
-## Needs final generated outputs from the notebook
-- Final model lock CSV from notebook Section 7
-- Robustness CSV and plot from notebook Section 8
-- Grad-CAM figure and metadata from notebook Section 9
-- Deployment summary and ONNX export status from notebook Section 10
-- Report-ready benchmark and robustness tables plus summary text from notebook Section 11
+The following outputs have been materialized into the local submission package under `submission_ready/final_package/`:
 
-## Recommended writing order
-1. Start with `internship_report_draft.md` as the base narrative.
-2. Treat `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` as the current benchmark source of truth for locally reproducible numbers.
-3. Run notebook Sections 7 to 11 to generate the new saved outputs.
-4. Replace placeholder language in the draft with the final saved values.
-5. Insert the selected figures and tables from `docs/report_drafts/figures_for_report/README.md` and `docs/report_drafts/tables_for_report/report_tables.md`.
-6. Add APA 7 references from the literature review files.
+- final model lock and protocol CSVs
+- robustness CSV and robustness figure
+- Grad-CAM figure and metadata CSV
+- deployment summary plus JSON artifacts
+- report-ready benchmark and robustness tables
+- final results summary text
+
+## Best current writing base
+
+Use these files first:
+
+1. `submission_ready/final_package/reports/internship_report_submission.md`
+2. `submission_ready/final_package/reports/journal_paper_submission.md`
+3. `submission_ready/final_package/report_ready/results_summary.md`
+4. `submission_ready/final_package/report_ready/benchmark_table_report_ready.csv`
+5. `submission_ready/final_package/report_ready/robustness_table_report_ready.csv`
+
+## Remaining writing work
+
+The remaining work is mostly packaging and academic formatting:
+
+1. Paste APA 7 references from `docs/literature_review/` into the final report export.
+2. Move the Markdown report into the required university or internship template.
+3. Export the final document as PDF or DOCX if required.
 
 ## Important honesty check
-- The benchmark numbers used in the draft should match the saved local benchmark artifact unless a fresh rerun replaces them.
-- Robustness, Grad-CAM, and deployment sections are prepared in the notebook but should not be written as completed final evidence until those cells are actually executed and saved.
+
+- The strongest final numbers now come from the executed notebook Sections 7 to 11 and are packaged locally in `submission_ready/final_package/metrics/`.
+- The earlier `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` is still preserved for traceability, but the final submission narrative should use the locked evaluation values packaged in `submission_ready/final_package/`.

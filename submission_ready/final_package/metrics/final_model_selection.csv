@@ -1,0 +1,2 @@
+model,accuracy,f1_macro,latency_ms
+Hybrid CNN-Transformer,0.9308,0.9384,1.404

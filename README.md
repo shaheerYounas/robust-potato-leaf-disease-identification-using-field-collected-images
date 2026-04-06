@@ -4,18 +4,17 @@ This workspace is now organized with a project-management layer on top of the ex
 
 ## Current Project Stage
 
-The project is now in the finalization stage.
+The project is now in submission assembly stage.
 
-- Literature review research is complete, but the final written report section is still pending.
-- Dataset analysis and EDA are strong and mostly complete.
-- Model benchmarking and comparison are strong in the saved local artifacts and notebook workflow.
-- The main remaining work is final evaluation framing, robustness, explainability, deployment, and report packaging.
+- Literature review research is complete.
+- Dataset analysis, benchmarking, final evaluation locking, robustness, Grad-CAM, and deployment packaging are now all present in the notebook evidence and local submission package.
+- A clean submission bundle now exists under `submission_ready/final_package/`.
 
 Current practical status:
 
-- Overall project substance: about 70% complete
-- Submission-ready packaging: about 50% complete
-- Strongest evidence location: `Advance_Practice_Potato_Leaf.ipynb`
+- Overall project substance: about 90% complete
+- Submission-ready packaging: about 85% complete
+- Strongest evidence locations: `Advance_Practice_Potato_Leaf.ipynb` and `submission_ready/final_package/`
 
 ## Start Here
 
@@ -24,6 +23,7 @@ Current practical status:
 - Active work summary: `in_progress/README.md`
 - Completed work summary: `completed/README.md`
 - Final deliverables checklist: `submission_ready/README.md`
+- Final submission bundle: `submission_ready/final_package/README.md`
 
 ## Technical Folders
 
@@ -47,3 +47,10 @@ Do not split the core project workflow into separate training scripts unless thi
 The GitHub repository excludes `data/raw/` and `data/processed/` from version control because the image datasets are too large for a normal repository.
 Larger EfficientNet and Hybrid checkpoint files are also kept local-only because they exceed normal GitHub file-size limits.
 The project still includes notebooks, documentation, outputs, setup instructions, and lightweight artifacts needed to understand and reproduce the work structure.
+
+## Remaining Manual Finish
+
+The main remaining work is formatting rather than experimentation:
+
+- convert the final Markdown report into the required institutional template
+- paste in the final APA 7 references from `docs/literature_review/`

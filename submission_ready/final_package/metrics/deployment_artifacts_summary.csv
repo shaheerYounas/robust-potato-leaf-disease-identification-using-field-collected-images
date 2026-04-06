@@ -1,0 +1,6 @@
+artifact,path
+class_info,C:\Users\Shaheer\Desktop\Bilal-Advance Practice\submission_ready\final_package\deployment\class_info.json
+sample_prediction_json,C:\Users\Shaheer\Desktop\Bilal-Advance Practice\submission_ready\final_package\deployment\sample_prediction.json
+prediction_figure,C:\Users\Shaheer\Desktop\Bilal-Advance Practice\submission_ready\final_package\figures\deployment\single_image_prediction_Hybrid_CNN-Transformer.png
+onnx_export,C:\Users\Shaheer\Desktop\Bilal-Advance Practice\submission_ready\final_package\deployment\Hybrid_CNN-Transformer.onnx
+onnx_status,skipped: No module named 'onnxscript'

@@ -1,0 +1,9 @@
+item,value
+split_used,validation holdout from original images
+train_balancing,in-memory balancing to 748 samples per class
+selection_rule,"macro-F1 desc, accuracy desc, latency asc"
+selection_metrics,"f1_macro, accuracy, latency_ms"
+locked_model,Hybrid CNN-Transformer
+validation_sample_count,607
+class_count,7
+random_seed,42

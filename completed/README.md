@@ -38,8 +38,7 @@ This folder summarizes the work that already exists in the workspace or is stron
 
 ## Evidence Locations
 
-- Main notebook: `Advance_Practice_Potato_Leaf.ipynb`
-- Local phase-2 notebook: `Notebook/Advance_Practice_Phase_2.ipynb`
+- Main notebook: `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 - EDA outputs: `outputs/`
 - Local benchmark artifacts: `artifacts/phase_2_benchmarking/`
 

@@ -12,7 +12,7 @@ As of April 4, 2026, the project has strong evidence for:
 - report draft creation
 
 The strongest current technical evidence is still centered in:
-- `Advance_Practice_Potato_Leaf.ipynb`
+- `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 
 ## What Is Already Available
 - raw dataset under `data/raw/`
@@ -25,7 +25,7 @@ The strongest current technical evidence is still centered in:
 
 ## Main Notebook Workflow
 The project rule is to keep the core technical workflow inside:
-- `Advance_Practice_Potato_Leaf.ipynb`
+- `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 
 The notebook now includes sections for:
 1. dataset analysis and EDA
@@ -60,7 +60,7 @@ Because of that, the final notebook execution should be done in the intended GPU
 
 ## Recommended Next Run Sequence
 1. Prepare the GPU environment from `SETUP_ON_GPU_MACHINE.txt`.
-2. Open `Advance_Practice_Potato_Leaf.ipynb`.
+2. Open `Notebook/Advance_Practice_Potato_Leaf.ipynb`.
 3. Reuse the already saved local benchmark artifacts unless you intentionally want a fresh benchmark rerun.
 4. Run notebook Sections 7 to 11 to generate final evaluation, robustness, explainability, deployment, and report-ready outputs.
 5. Update the report drafts using the saved local benchmark artifacts plus the new Section 7 to 11 outputs.

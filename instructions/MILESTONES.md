@@ -10,7 +10,7 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 - Workspace root: `C:\Users\Shaheer\Desktop\Bilal-Advance Practice`
 - Project level: final-year undergraduate internship / capstone style AI project
 - Mandatory workflow rule:
-  - All code-related project work must stay in the existing main notebook: `Advance_Practice_Potato_Leaf.ipynb`.
+  - All code-related project work must stay in the existing main notebook: `Notebook/Advance_Practice_Potato_Leaf.ipynb`.
 - Main reality check:
   - Literature review research is complete, but the final written report section is still pending.
   - Core EDA is complete and already strong enough for project use.
@@ -59,8 +59,7 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 
 ### Training and benchmarking evidence
 
-- Main notebook: `Advance_Practice_Potato_Leaf.ipynb`
-- Local phase-2 notebook: `Notebook/Advance_Practice_Phase_2.ipynb`
+- Main notebook: `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 - Local artifacts present:
   - `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv`
   - `artifacts/phase_2_benchmarking/metrics/preprocessing_summary.csv`

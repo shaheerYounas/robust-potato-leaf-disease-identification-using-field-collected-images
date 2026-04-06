@@ -17,8 +17,8 @@ The project is in the transition from completed experimentation to final evaluat
 
 ## Current Technical Truth
 
-- Strongest evidence lives in `Advance_Practice_Potato_Leaf.ipynb`
-- All code-related project execution should remain in `Advance_Practice_Potato_Leaf.ipynb`
+- Strongest evidence lives in `Notebook/Advance_Practice_Potato_Leaf.ipynb`
+- All code-related project execution should remain in `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 - Literature review research is complete, but the final written section is not yet drafted into the report
 - EDA is already strong and mostly complete; only selective high-value additions may still help
 - Benchmarking is strong in local saved artifacts as well as notebook logic
@@ -37,8 +37,7 @@ The project is in the transition from completed experimentation to final evaluat
 
 ## Files Most Likely To Be Worked On Next
 
-- `Advance_Practice_Potato_Leaf.ipynb`
-- `Notebook/Advance_Practice_Phase_2.ipynb`
+- `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 - `instructions/MILESTONES.md`
 - `requirements.txt`
 

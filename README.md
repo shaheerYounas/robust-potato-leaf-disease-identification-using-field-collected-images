@@ -14,7 +14,7 @@ Current practical status:
 
 - Overall project substance: about 90% complete
 - Submission-ready packaging: about 85% complete
-- Strongest evidence locations: `Advance_Practice_Potato_Leaf.ipynb` and `submission_ready/final_package/`
+- Strongest evidence locations: `Notebook/Advance_Practice_Potato_Leaf.ipynb` and `submission_ready/final_package/`
 
 ## Start Here
 
@@ -30,7 +30,7 @@ Current practical status:
 - `data/` holds raw and processed datasets
 - `outputs/` holds EDA outputs
 - `artifacts/` holds saved local model artifacts and metrics
-- `Notebook/` and `Advance_Practice_Potato_Leaf.ipynb` hold notebook-based experimentation and benchmark evidence
+- `Notebook/`, especially `Notebook/Advance_Practice_Potato_Leaf.ipynb`, holds notebook-based experimentation and benchmark evidence
 - `docs/` holds source documents, literature review files, and project description files
 
 ## Organization Rule
@@ -39,7 +39,7 @@ The new folders organize the project without moving core datasets or notebook fi
 
 ## Single Notebook Rule
 
-All project code-related work, including preprocessing, model running, training, evaluation, and experiment tracking, must stay inside the existing main Jupyter notebook already in use: `Advance_Practice_Potato_Leaf.ipynb`.
+All project code-related work, including preprocessing, model running, training, evaluation, and experiment tracking, must stay inside the existing main Jupyter notebook already in use: `Notebook/Advance_Practice_Potato_Leaf.ipynb`.
 Do not split the core project workflow into separate training scripts unless this rule is intentionally changed later.
 
 ## GitHub Repository Note

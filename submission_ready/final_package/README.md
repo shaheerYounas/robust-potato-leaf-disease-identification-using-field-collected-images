@@ -41,7 +41,7 @@ The checkpoint itself was not duplicated into this package because the existing 
 If you need to hand this over to a supervisor, examiner, or external machine, the safest compact package is:
 
 1. This `final_package/` folder
-2. `Advance_Practice_Potato_Leaf.ipynb`
+2. `Notebook/Advance_Practice_Potato_Leaf.ipynb`
 3. `predict.py`
 4. `app.py`
 5. `potato_leaf_inference.py`

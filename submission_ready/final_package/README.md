@@ -23,10 +23,11 @@ Main contents:
 
 ## Final Locked Model
 
-- Model: `Hybrid CNN-Transformer`
-- Validation accuracy: `0.9308`
-- Validation macro-F1: `0.9384`
-- Latency: `1.404 ms/image`
+- Model: `EfficientNetB0 (fine-tune)`
+- Test accuracy: `0.9251`
+- Test macro-F1: `0.9288`
+- GPU Latency: `1.282 ms/image`
+- CPU Latency: `81.74 ms/image`
 
 Checkpoint location:
 
@@ -34,7 +35,7 @@ Checkpoint location:
 
 The checkpoint itself was not duplicated into this package because the existing file is already stored locally at:
 
-- `artifacts/phase_2_benchmarking/models/hybrid_cnn_transformer_best.pt`
+- `artifacts/phase_2_benchmarking/models/efficientnet_b0_finetune_best.pt`
 
 ## Recommended Submission Contents
 

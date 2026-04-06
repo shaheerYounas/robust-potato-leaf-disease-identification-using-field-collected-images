@@ -35,42 +35,45 @@ Source:
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) |
 |---|---:|---:|---:|
-| Baseline CNN | 0.6405 | 0.6372 | 1.060 |
-| EfficientNetB0 (frozen) | 0.6977 | 0.6763 | 1.211 |
-| EfficientNetB0 (fine-tuned) | 0.8317 | 0.8195 | 1.167 |
-| Hybrid CNN-Transformer | 0.8301 | 0.8319 | 1.436 |
+| EfficientNetB0 (fine-tuned) | 0.9251 | 0.9288 | 1.282 |
+| Hybrid CNN-Transformer | 0.9031 | 0.9079 | 1.325 |
+| EfficientNetB0 (frozen) | 0.7489 | 0.7359 | 1.036 |
+| Baseline CNN | 0.6454 | 0.6492 | 1.068 |
 
 Source:
-- `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv`
+- `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` (updated from latest Colab run)
 
-## Table 4. Current Best Model Statement
+## Table 4. Final Model Selection
 
-| Criterion | Current Best Model | Reason |
+| Criterion | Best Model | Value |
 |---|---|---|
-| Accuracy | EfficientNetB0 (fine-tuned) | Highest observed accuracy in the current local benchmark artifact |
-| Macro-F1 | Hybrid CNN-Transformer | Highest observed macro-F1 |
-| Latency | Baseline CNN | Lowest measured inference latency in the current local benchmark artifact |
-| Balanced research choice | Hybrid CNN-Transformer | Highest macro-F1 under the current macro-F1-first ranking rule |
+| Macro-F1 (primary) | EfficientNetB0 (fine-tuned) | 0.9288 |
+| Accuracy | EfficientNetB0 (fine-tuned) | 0.9251 |
+| Latency | EfficientNetB0 (frozen) | 1.036 ms |
+| Locked selection | **EfficientNetB0 (fine-tuned)** | Highest macro-F1, highest accuracy |
 
-## Table 5. Robustness Results Placeholder
-
-Replace this table after running notebook Section 8.
+## Table 5. Robustness Results
 
 | Condition | Accuracy | Macro-F1 | Accuracy Drop vs Clean | F1 Drop vs Clean |
 |---|---:|---:|---:|---:|
-| Clean Validation Images | [pending] | [pending] | 0.0000 | 0.0000 |
-| Gaussian Blur | [pending] | [pending] | [pending] | [pending] |
-| Low Light | [pending] | [pending] | [pending] | [pending] |
-| Gaussian Noise | [pending] | [pending] | [pending] | [pending] |
-| Center Occlusion | [pending] | [pending] | [pending] | [pending] |
+| Clean (Test Set) | 0.9251 | 0.9288 | — | — |
+| Gaussian Blur | 0.9119 | 0.9186 | 0.0132 | 0.0102 |
+| Low Light | 0.8172 | 0.8297 | 0.1079 | 0.0991 |
+| Gaussian Noise | 0.9273 | 0.9301 | −0.0022 | −0.0013 |
+| Center Occlusion | 0.8348 | 0.8421 | 0.0903 | 0.0867 |
 
-## Table 6. Deployment Artifacts Placeholder
+Source:
+- `submission_ready/final_package/metrics/robustness_results.csv`
 
-Replace this table after running notebook Section 10.
+## Table 6. Deployment Artifacts
 
 | Artifact | Status |
 |---|---|
-| Class metadata JSON | [pending] |
-| Sample single-image prediction JSON | [pending] |
-| Prediction figure | [pending] |
-| ONNX export | [pending] |
+| Class metadata JSON (`class_info.json`) | Saved |
+| Sample single-image prediction JSON | Saved |
+| Prediction figure | Saved |
+| ONNX export | Skipped (missing `onnxscript` on Colab) |
+| Streamlit web app (`app.py`) | Ready |
+| CLI prediction tool (`predict.py`) | Ready |
+| Model version manifest | Saved |
+| CPU latency benchmark CSV | Saved |

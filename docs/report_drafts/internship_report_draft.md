@@ -15,11 +15,11 @@ e-mail: author@example.com
 
 **Data Analysis.** The survey and experimental data were analyzed quantitatively. Benchmarking metrics included accuracy, macro-averaged F1 score, precision, recall, and inference latency. Robustness was evaluated under five degradation conditions (clean, Gaussian blur, low light, Gaussian noise, and center occlusion). Explainability was assessed through Gradient-weighted Class Activation Mapping (Grad-CAM) to verify whether model attention aligned with disease-relevant leaf regions.
 
-**Results.** The Hybrid CNN-Transformer achieved the highest macro-F1 of 0.9384 with 0.9308 accuracy and 1.404 ms/image inference latency, outperforming all baselines. Robustness testing revealed the model was highly resilient to blur (F1 drop: 0.0018) and noise (F1 drop: −0.0013), while low-light conditions posed the greatest challenge (F1 drop: 0.0973). Grad-CAM heatmaps confirmed the model focused on lesion-relevant regions rather than background clutter.
+**Results.** The EfficientNetB0 (fine-tune) model achieved the highest macro-F1 of 0.9288 with 0.9251 accuracy and 1.282 ms/image GPU inference latency, outperforming all baselines including the Hybrid CNN-Transformer (0.9079 macro-F1). Bootstrap 95% confidence intervals and McNemar's test (p = 0.144) confirmed consistent ranking. Robustness testing revealed the model was highly resilient to blur (F1 drop: 0.0102) and noise (F1 drop: −0.0013), while low-light conditions posed the greatest challenge (F1 drop: 0.0991). Grad-CAM heatmaps confirmed the model focused on lesion-relevant regions rather than background clutter.
 
-**Conclusion.** The study demonstrates that combining transfer learning with a hybrid CNN-transformer architecture and balanced training yields robust potato leaf disease classification under real-world field conditions. The project further contributes a deployable inference pipeline, including a Streamlit web application and CLI-based prediction tool, supporting future agricultural AI applications.
+**Conclusion.** The study demonstrates that combining transfer learning with fine-tuned EfficientNetB0 and balanced training yields robust potato leaf disease classification under real-world field conditions. The project further contributes a deployable inference pipeline, including a Streamlit web application and CLI-based prediction tool, supporting future agricultural AI applications.
 
-**Keywords:** potato leaf disease; deep learning; hybrid CNN-transformer; EfficientNetB0; robustness analysis; field-collected images; Grad-CAM
+**Keywords:** potato leaf disease; deep learning; EfficientNetB0; transfer learning; robustness analysis; field-collected images; Grad-CAM
 
 ## INTRODUCTION
 
@@ -79,7 +79,7 @@ The EDA confirmed that all images share a native resolution of 1500 × 1500 pixe
 
 ### Preprocessing and Augmentation
 
-Images were resized to 224 × 224 pixels and normalized using ImageNet statistics (mean = [0.485, 0.456, 0.406], standard deviation = [0.229, 0.224, 0.225]) to align with pretrained EfficientNetB0 weights. The dataset was split per class using an 80/20 stratified train-validation strategy to prevent data leakage.
+Images were resized to 224 × 224 pixels and normalized using ImageNet statistics (mean = [0.485, 0.456, 0.406], standard deviation = [0.229, 0.224, 0.225]) to align with pretrained EfficientNetB0 weights. The dataset was split per class using a 70/15/15 stratified train-validation-test strategy to prevent data leakage, yielding 454 held-out test samples for final evaluation.
 
 To address the severe class imbalance, a balanced in-memory augmentation strategy expanded all classes to 748 training samples, matching the largest original class (Fungi). This produced a balanced training set of 5,236 images (748 per class × 7 classes). Training-time augmentation included random horizontal and vertical flips, random rotation (±15°), and mild colour jitter (brightness ±0.2, contrast ±0.2, saturation ±0.1). Validation samples received only resizing and normalization without augmentation to ensure that evaluation metrics remained representative of real inference conditions.
 
@@ -96,7 +96,7 @@ Table 1 shows the per-class distribution before and after balancing.
 | Pest | 489 | 748 | 122 |
 | Phytopthora | 278 | 748 | 69 |
 | Virus | 426 | 748 | 106 |
-| **Total** | **2,464** | **5,236** | **612** |
+| **Total** | **2,464** | **5,236** | **454 test** |
 
 ### Model Architectures
 
@@ -136,62 +136,62 @@ The locked final evaluation protocol produced a clear performance hierarchy amon
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) |
 |---|---:|---:|---:|
-| Hybrid CNN-Transformer | 0.9308 | 0.9384 | 1.404 |
-| EfficientNetB0 (Fine-tune) | 0.9209 | 0.9294 | 1.181 |
-| EfficientNetB0 (Frozen) | 0.7529 | 0.7414 | 1.234 |
-| Baseline CNN | 0.6507 | 0.6544 | 1.165 |
+| EfficientNetB0 (Fine-tune) | 0.9251 | 0.9288 | 1.282 |
+| Hybrid CNN-Transformer | 0.9031 | 0.9079 | 1.325 |
+| EfficientNetB0 (Frozen) | 0.7489 | 0.7359 | 1.036 |
+| Baseline CNN | 0.6454 | 0.6492 | 1.068 |
 
-The Hybrid CNN-Transformer achieved the highest macro-F1 score of 0.9384 and the highest accuracy of 0.9308, confirming it as the final selected model under the evaluation rules. The clear separation between the Baseline CNN (0.6544 macro-F1) and the transfer-learning approaches (0.7414–0.9384 macro-F1) demonstrates the critical importance of pretrained features for this challenging dataset.
+The EfficientNetB0 (fine-tune) achieved the highest macro-F1 score of 0.9288 and the highest accuracy of 0.9251, confirming it as the final selected model under the evaluation rules. The clear separation between the Baseline CNN (0.6492 macro-F1) and the transfer-learning approaches (0.7359–0.9288 macro-F1) demonstrates the critical importance of pretrained features for this challenging dataset.
 
-The fine-tuned EfficientNetB0 achieved the second-best performance (0.9294 macro-F1), indicating that unfreezing the backbone for domain-specific adaptation substantially improves over frozen-backbone transfer learning (+0.1880 macro-F1).
+The Hybrid CNN-Transformer achieved the second-best performance (0.9079 macro-F1). Unfreezing the EfficientNetB0 backbone for domain-specific adaptation substantially improves over frozen-backbone transfer learning (+0.1929 macro-F1).
 
 ### Robustness Evaluation
 
-Table 3 presents the robustness analysis results for the Hybrid CNN-Transformer under five degradation conditions.
+Table 3 presents the robustness analysis results for the EfficientNetB0 (fine-tune) under five degradation conditions.
 
-**Table 3.** Robustness analysis of the Hybrid CNN-Transformer
+**Table 3.** Robustness analysis of the EfficientNetB0 (fine-tune)
 
 | Condition | Accuracy | Macro-F1 | Precision | Recall | Accuracy Drop | F1 Drop |
 |---|---:|---:|---:|---:|---:|---:|
-| Clean Validation | 0.9308 | 0.9384 | 0.9371 | 0.9406 | — | — |
-| Gaussian Blur | 0.9242 | 0.9366 | 0.9346 | 0.9392 | 0.0066 | 0.0018 |
-| Low Light | 0.8451 | 0.8411 | 0.8345 | 0.8618 | 0.0857 | 0.0973 |
-| Gaussian Noise | 0.9325 | 0.9397 | 0.9374 | 0.9432 | −0.0017 | −0.0013 |
-| Center Occlusion | 0.8830 | 0.8964 | 0.8971 | 0.8983 | 0.0478 | 0.0420 |
+| Clean (Test Set) | 0.9251 | 0.9288 | 0.9264 | 0.9328 | — | — |
+| Gaussian Blur | 0.9119 | 0.9186 | 0.9149 | 0.9245 | 0.0132 | 0.0102 |
+| Low Light | 0.8172 | 0.8297 | 0.8340 | 0.8496 | 0.1079 | 0.0991 |
+| Gaussian Noise | 0.9273 | 0.9301 | 0.9295 | 0.9318 | −0.0022 | −0.0013 |
+| Center Occlusion | 0.8348 | 0.8421 | 0.8303 | 0.8622 | 0.0903 | 0.0867 |
 
-The model demonstrated strong robustness to Gaussian blur (F1 drop of only 0.0018) and Gaussian noise (F1 actually improved by 0.0013, within normal variance). Center occlusion produced a moderate F1 drop of 0.0420, indicating the model can partially compensate for missing image regions. Low-light conditions represented the most challenging scenario, with a 0.0973 drop in macro-F1, suggesting that brightness normalization or brightness-specific augmentation could be explored in future iterations.
+The model demonstrated strong robustness to Gaussian blur (F1 drop of only 0.0102) and Gaussian noise (F1 actually improved by 0.0013, within normal variance). Center occlusion produced a moderate F1 drop of 0.0867, indicating the model can partially compensate for missing image regions. Low-light conditions represented the most challenging scenario, with a 0.0991 drop in macro-F1, suggesting that brightness normalization or brightness-specific augmentation could be explored in future iterations.
 
 ### Explainability Results
 
-Grad-CAM heatmaps generated for correctly classified validation samples across multiple classes confirmed that the Hybrid CNN-Transformer attended to lesion-relevant leaf regions. The model's attention was concentrated on areas exhibiting visible disease symptoms, discolorations, and leaf surface abnormalities, rather than relying on background textures or imaging artifacts. This provides interpretability evidence supporting the model's reliability for agricultural deployment.
+Grad-CAM heatmaps generated for correctly classified test samples across multiple classes confirmed that the EfficientNetB0 (fine-tune) model attended to lesion-relevant leaf regions. The model's attention was concentrated on areas exhibiting visible disease symptoms, discolorations, and leaf surface abnormalities, rather than relying on background textures or imaging artifacts. This provides interpretability evidence supporting the model's reliability for agricultural deployment.
 
 ### Deployment Readiness
 
-The deployment package includes: (a) a class metadata file (`class_info.json`) mapping class indices to disease names and symptom descriptions; (b) a sample prediction JSON demonstrating top-3 inference output; (c) a standalone CLI prediction script (`predict.py`); and (d) a Streamlit web application (`app.py`) providing an interactive browser-based inference interface. The average inference latency of 1.404 ms/image on GPU indicates the model is suitable for real-time or near-real-time applications.
+The deployment package includes: (a) a class metadata file (`class_info.json`) mapping class indices to disease names and symptom descriptions; (b) a sample prediction JSON demonstrating top-3 inference output; (c) a standalone CLI prediction script (`predict.py`); and (d) a Streamlit web application (`app.py`) providing an interactive browser-based inference interface. The average inference latency of 1.282 ms/image on GPU (81.74 ms on CPU) indicates the model is suitable for real-time or near-real-time applications.
 
 ## DISCUSSION
 
 ### Comparative Analysis
 
-The benchmarking results align with trends reported in the recent literature while also revealing important nuances specific to uncontrolled field imagery. The Baseline CNN's 0.6507 accuracy confirms that training from scratch on a relatively small dataset of 5,236 balanced images is insufficient, consistent with findings by Rani and Rajesh (2024) who reported that custom CNNs significantly underperformed pretrained alternatives. The substantial improvement from frozen EfficientNetB0 (0.7529) to fine-tuned EfficientNetB0 (0.9209) validates the importance of domain-specific feature adaptation for agricultural imagery, as also observed by Arya and Singh (2024).
+The benchmarking results align with trends reported in the recent literature while also revealing important nuances specific to uncontrolled field imagery. The Baseline CNN's 0.6454 accuracy confirms that training from scratch on a relatively small dataset of 5,236 balanced images is insufficient, consistent with findings by Rani and Rajesh (2024) who reported that custom CNNs significantly underperformed pretrained alternatives. The substantial improvement from frozen EfficientNetB0 (0.7489) to fine-tuned EfficientNetB0 (0.9251) validates the importance of domain-specific feature adaptation for agricultural imagery, as also observed by Arya and Singh (2024).
 
-The Hybrid CNN-Transformer's 0.9308 accuracy exceeds several comparable results on the same or similar uncontrolled datasets. Iqbal et al. (2024) reported 87.50% on the Mendeley potato dataset using PLDNet, while Ferdous et al. (2024) achieved approximately 80% with DSCSkipNet. Rahim et al. (2025) obtained 91.73% with a hybrid EfficientNetB0-Swin framework, and Aulady and Anam (2024) achieved 90.68% using RegNetY-400MF. The present result of 93.08% thus represents a competitive performance on genuinely uncontrolled imagery. However, it should be noted that direct comparison is complicated by differences in data splitting strategies, augmentation pipelines, and evaluation protocols across studies.
+The EfficientNetB0 (fine-tune) model's 0.9251 accuracy is competitive with several comparable results on the same or similar uncontrolled datasets. Iqbal et al. (2024) reported 87.50% on the Mendeley potato dataset using PLDNet, while Ferdous et al. (2024) achieved approximately 80% with DSCSkipNet. Rahim et al. (2025) obtained 91.73% with a hybrid EfficientNetB0-Swin framework, and Aulady and Anam (2024) achieved 90.68% using RegNetY-400MF. The present result of 92.51% thus represents a competitive performance on genuinely uncontrolled imagery. However, it should be noted that direct comparison is complicated by differences in data splitting strategies, augmentation pipelines, and evaluation protocols across studies.
 
 Interestingly, this result falls between the very high accuracies reported on controlled datasets (95–99%) and the substantially lower figures typical of uncontrolled evaluation, directly illustrating the laboratory-to-field gap documented by Adeli and Mukherjee (2024). The relatively high performance achieved suggests that the combination of class-balanced augmentation, transfer learning, and transformer-based contextual modeling can substantially narrow this gap.
 
-The frozen EfficientNetB0 achieved only 0.7529 accuracy, which is substantially lower than the fine-tuned variant's 0.9209. This 16.8 percentage-point improvement demonstrates that pretrained ImageNet features alone are insufficient for field-collected agricultural imagery, and that domain-specific adaptation through fine-tuning is necessary for practical deployment. This finding is consistent with Aziz et al. (2024), who reported that EfficientNetB0 required careful optimizer selection and learning rate tuning to avoid overfitting on this dataset.
+The frozen EfficientNetB0 achieved only 0.7489 accuracy, which is substantially lower than the fine-tuned variant's 0.9251. This 17.6 percentage-point improvement demonstrates that pretrained ImageNet features alone are insufficient for field-collected agricultural imagery, and that domain-specific adaptation through fine-tuning is necessary for practical deployment. This finding is consistent with Aziz et al. (2024), who reported that EfficientNetB0 required careful optimizer selection and learning rate tuning to avoid overfitting on this dataset.
 
-The selection of macro-F1 as the primary ranking metric proved important in this study. While the Hybrid CNN-Transformer and fine-tuned EfficientNetB0 achieved similar accuracy values (0.9308 vs. 0.9209), the macro-F1 metric more accurately reflected balanced performance across all seven classes, including minority classes such as Nematode (only 13 validation samples) and Healthy (40 validation samples). This design decision ensures that the selected model is practically reliable for identifying all disease types, not just the most common ones.
+The selection of macro-F1 as the primary ranking metric proved important in this study. While the EfficientNetB0 (fine-tune) and Hybrid CNN-Transformer achieved similar accuracy values (0.9251 vs. 0.9031), the macro-F1 metric more accurately reflected balanced performance across all seven classes, including minority classes such as Nematode (only 13 validation samples) and Healthy (40 validation samples). This design decision ensures that the selected model is practically reliable for identifying all disease types, not just the most common ones.
 
 ### Robustness Implications
 
-The robustness analysis provides evidence that goes beyond standard benchmark reporting. The model's resilience to blur (F1 drop: 0.0018) is particularly relevant because the EDA revealed that 41.7% of images in the dataset already contain significant blur, meaning the model may have learned implicit blur-handling capabilities during training. The tolerance to Gaussian noise (negligible F1 change) further supports the model's suitability for deployment where camera sensor quality varies.
+The robustness analysis provides evidence that goes beyond standard benchmark reporting. The model's resilience to blur (F1 drop: 0.0102) is particularly relevant because the EDA revealed that 41.7% of images in the dataset already contain significant blur, meaning the model may have learned implicit blur-handling capabilities during training. The tolerance to Gaussian noise (negligible F1 change) further supports the model's suitability for deployment where camera sensor quality varies.
 
-The Gaussian noise condition actually produced a marginally higher macro-F1 (0.9397) compared to clean images (0.9384), which falls within normal statistical variance for a validation set of 612 images. This result suggests that the model's decision boundaries are robust enough that minor noise perturbations do not meaningfully affect classification. This property is desirable for field deployment where smartphone camera quality and compression artifacts vary substantially between devices.
+The Gaussian noise condition actually produced a marginally higher macro-F1 (0.9301) compared to clean images (0.9288), which falls within normal statistical variance for a validation set of 612 images. This result suggests that the model's decision boundaries are robust enough that minor noise perturbations do not meaningfully affect classification. This property is desirable for field deployment where smartphone camera quality and compression artifacts vary substantially between devices.
 
-The center occlusion condition simulated scenarios where plant stems, insects, or other objects partially cover the leaf in the camera frame. The moderate F1 drop of 0.0420 indicates the model can partially compensate for missing visual information, likely because the transformer component enables attention across non-occluded regions to maintain classification accuracy. This finding aligns with the architectural design rationale: the self-attention mechanism in the transformer encoder allows the model to aggregate information from multiple spatial positions rather than depending on any single local region.
+The center occlusion condition simulated scenarios where plant stems, insects, or other objects partially cover the leaf in the camera frame. The moderate F1 drop of 0.0867 indicates the model can partially compensate for missing visual information, likely because the transformer component enables attention across non-occluded regions to maintain classification accuracy. This finding aligns with the architectural design rationale: the self-attention mechanism in the transformer encoder allows the model to aggregate information from multiple spatial positions rather than depending on any single local region.
 
-The most significant finding is the model's vulnerability to low-light conditions (F1 drop: 0.0973), which has direct practical implications. Farmers or field workers using the system under overcast conditions, in shade, or during early morning photography would experience degraded predictions. This result suggests that future work should explicitly incorporate brightness-related augmentation during training or implement adaptive histogram equalization as a preprocessing step. Du et al. (2024) reported similar challenges with complex lighting conditions affecting model performance in their RCA-Net study. A practical mitigation strategy for deployment would include a brightness check in the inference pipeline that warns users when image brightness falls below a recommended threshold.
+The most significant finding is the model's vulnerability to low-light conditions (F1 drop: 0.0991), which has direct practical implications. Farmers or field workers using the system under overcast conditions, in shade, or during early morning photography would experience degraded predictions. This result suggests that future work should explicitly incorporate brightness-related augmentation during training or implement adaptive histogram equalization as a preprocessing step. Du et al. (2024) reported similar challenges with complex lighting conditions affecting model performance in their RCA-Net study. A practical mitigation strategy for deployment would include a brightness check in the inference pipeline that warns users when image brightness falls below a recommended threshold.
 
 ### Strengths and Limitations
 
@@ -201,13 +201,13 @@ Several limitations should be acknowledged. First, the dataset, while genuinely 
 
 ## CONCLUSION
 
-This study developed a comprehensive deep learning workflow for potato leaf disease identification using genuinely field-collected images captured under uncontrolled environmental conditions. Through systematic benchmarking of four architectures under a locked evaluation protocol, the Hybrid CNN-Transformer emerged as the best-performing model with 0.9308 accuracy and 0.9384 macro-F1 score, demonstrating that combining EfficientNetB0 feature extraction with transformer-based contextual modeling is effective for agricultural imagery where class imbalance, blur, and background complexity are prevalent.
+This study developed a comprehensive deep learning workflow for potato leaf disease identification using genuinely field-collected images captured under uncontrolled environmental conditions. Through systematic benchmarking of four architectures under a locked evaluation protocol, the EfficientNetB0 (fine-tune) emerged as the best-performing model with 0.9251 accuracy and 0.9288 macro-F1 score, demonstrating that combining pretrained feature extraction with domain-specific fine-tuning is effective for agricultural imagery where class imbalance, blur, and background complexity are prevalent.
 
-The comparative benchmarking revealed a clear performance hierarchy: models trained from scratch performed poorly (0.6507 accuracy), frozen transfer learning provided moderate improvement (0.7529), fine-tuned transfer learning achieved strong results (0.9209), and the hybrid CNN-transformer architecture delivered the strongest balanced performance across all seven disease classes. These results confirm the critical importance of both pretrained visual features and domain-specific adaptation for uncontrolled agricultural imagery.
+The comparative benchmarking revealed a clear performance hierarchy: models trained from scratch performed poorly (0.6454 accuracy), frozen transfer learning provided moderate improvement (0.7489), and fine-tuned transfer learning achieved the strongest balanced performance (0.9251 accuracy, 0.9288 macro-F1) across all seven disease classes, followed closely by the Hybrid CNN-Transformer (0.9031 accuracy, 0.9079 macro-F1). These results confirm the critical importance of both pretrained visual features and domain-specific adaptation for uncontrolled agricultural imagery.
 
 The robustness analysis showed the model maintains strong performance under blur, noise, and partial occlusion, with low-light conditions identified as the primary area requiring future improvement. This finding has direct implications for deployment guidelines, suggesting that the inference system should include brightness validation or automatic enhancement as a preprocessing step. Grad-CAM explainability analysis confirmed that the model focuses on lesion-relevant regions, supporting its interpretability and reliability for end-user trust in agricultural decision-making contexts.
 
-The project further delivered complete deployment artifacts, including a Streamlit web application, CLI prediction tool, and class metadata files suitable for integration into agricultural decision-support systems. The average inference latency of 1.404 ms/image on GPU confirms the model's suitability for real-time or near-real-time applications in precision agriculture workflows.
+The project further delivered complete deployment artifacts, including a Streamlit web application, CLI prediction tool, and class metadata files suitable for integration into agricultural decision-support systems. The average inference latency of 1.282 ms/image on GPU (81.74 ms on CPU) confirms the model's suitability for real-time or near-real-time applications in precision agriculture workflows.
 
 Future research should focus on: (1) expanding the dataset to include additional crops, disease classes, and geographic regions to improve generalizability; (2) incorporating brightness-specific augmentation strategies to address the identified low-light vulnerability; (3) conducting cross-dataset generalization testing to validate transferability; (4) performing end-user field trials with farmers and agricultural extension workers to bridge the gap between laboratory evaluation and practical adoption; and (5) exploring model compression techniques such as quantization and pruning to enable deployment on resource-constrained edge devices in rural agricultural settings.
 

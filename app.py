@@ -18,9 +18,9 @@ def get_runtime(checkpoint_path: str | None, class_info_path: str | None, device
 
 def main() -> None:
     st.title("Potato Leaf Disease Identification")
-    st.write("Upload a leaf image to run the final Hybrid CNN-Transformer model.")
+    st.write("Upload a leaf image to run the final EfficientNetB0 (fine-tune) model.")
 
-    default_checkpoint = Path("artifacts/phase_2_benchmarking/models/hybrid_cnn_transformer_best.pt")
+    default_checkpoint = Path("artifacts/phase_2_benchmarking/models/efficientnet_b0_finetune_best.pt")
     default_class_info = Path("submission_ready/final_package/deployment/class_info.json")
 
     with st.sidebar:

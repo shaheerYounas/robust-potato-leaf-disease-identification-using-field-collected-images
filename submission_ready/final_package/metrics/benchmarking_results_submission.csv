@@ -1,5 +1,5 @@
 model,accuracy,f1_macro,latency_ms
-Hybrid CNN-Transformer,0.9308,0.9384,1.404
-EfficientNetB0 (fine-tune),0.9209,0.9294,1.181
-EfficientNetB0 (frozen),0.7529,0.7414,1.234
-Baseline CNN,0.6507,0.6544,1.165
+EfficientNetB0 (fine-tune),0.9251,0.9288,1.282
+Hybrid CNN-Transformer,0.9031,0.9079,1.325
+EfficientNetB0 (frozen),0.7489,0.7359,1.036
+Baseline CNN,0.6454,0.6492,1.068

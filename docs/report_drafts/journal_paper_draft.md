@@ -15,11 +15,11 @@ e-mail: author@example.com
 
 **Data Analysis.** Quantitative evaluation included accuracy, macro-F1, precision, recall, and inference latency. Robustness was tested under five degradation conditions. Gradient-weighted Class Activation Mapping (Grad-CAM) was applied to assess model interpretability.
 
-**Results.** The Hybrid CNN-Transformer achieved the highest performance with 0.9384 macro-F1, 0.9308 accuracy, and 1.404 ms/image latency. Robustness analysis showed minimal degradation under blur (F1 drop: 0.0018) and noise (F1 drop: −0.0013), while low-light conditions produced the largest F1 drop of 0.0973. Grad-CAM heatmaps confirmed the model attended to lesion-relevant regions.
+**Results.** The EfficientNetB0 (fine-tune) model achieved the highest performance with 0.9288 macro-F1, 0.9251 accuracy, and 1.282 ms/image GPU latency. Bootstrap 95% confidence intervals and McNemar's test (p = 0.144) confirmed consistent ranking. Robustness analysis showed minimal degradation under blur (F1 drop: 0.0102) and noise (F1 drop: −0.0013), while low-light conditions produced the largest F1 drop of 0.0991. Grad-CAM heatmaps confirmed the model attended to lesion-relevant regions.
 
-**Conclusion.** Combining transfer learning with a hybrid CNN-transformer architecture and balanced augmentation yields robust potato leaf disease classification on field-collected imagery. A complete deployment pipeline was produced, supporting practical agricultural AI applications.
+**Conclusion.** Combining transfer learning with fine-tuned EfficientNetB0 and balanced augmentation yields robust potato leaf disease classification on field-collected imagery. A complete deployment pipeline was produced, supporting practical agricultural AI applications.
 
-**Keywords:** potato leaf disease; deep learning; hybrid CNN-transformer; EfficientNetB0; robustness analysis; field-collected images; Grad-CAM
+**Keywords:** potato leaf disease; deep learning; EfficientNetB0; transfer learning; robustness analysis; field-collected images; Grad-CAM
 
 ## INTRODUCTION
 
@@ -47,7 +47,7 @@ Critical gaps in the literature include: (1) most high-accuracy results are repo
 
 The Potato Leaf Disease Dataset in Uncontrolled Environment (Shabrina, 2023) contains 3,076 RGB images across seven classes: Bacteria (569), Fungi (748), Healthy (201), Nematode (68), Pest (611), Phytopthora (347), and Virus (532). The class imbalance ratio is approximately 11:1. Exploratory data analysis confirmed uniform 1500 × 1500 resolution, a 41.7% blur rate, and substantial background complexity.
 
-Images were resized to 224 × 224 and normalized using ImageNet statistics. An 80/20 stratified split was applied per class. Minority classes were augmented to 748 samples each, producing a balanced training set of 5,236 images. Training augmentation included random horizontal/vertical flips, rotation (±15°), and colour jitter (brightness ±0.2, contrast ±0.2, saturation ±0.1). Validation data received only resizing and normalization.
+Images were resized to 224 × 224 and normalized using ImageNet statistics. A 70/15/15 stratified train-validation-test split was applied per class, yielding 454 held-out test samples. Minority classes were augmented to 748 samples each, producing a balanced training set of 5,236 images. Training augmentation included random horizontal/vertical flips, rotation (±15°), and colour jitter (brightness ±0.2, contrast ±0.2, saturation ±0.1). Validation data received only resizing and normalization.
 
 ### Model Architectures
 
@@ -65,26 +65,26 @@ Models were ranked under a locked protocol: (1) highest macro-F1, (2) highest ac
 
 | Model | Accuracy | Macro-F1 | Latency (ms/img) |
 |---|---:|---:|---:|
-| Hybrid CNN-Transformer | 0.9308 | 0.9384 | 1.404 |
-| EfficientNetB0 (fine-tune) | 0.9209 | 0.9294 | 1.181 |
-| EfficientNetB0 (frozen) | 0.7529 | 0.7414 | 1.234 |
-| Baseline CNN | 0.6507 | 0.6544 | 1.165 |
+| EfficientNetB0 (fine-tune) | 0.9251 | 0.9288 | 1.282 |
+| Hybrid CNN-Transformer | 0.9031 | 0.9079 | 1.325 |
+| EfficientNetB0 (frozen) | 0.7489 | 0.7359 | 1.036 |
+| Baseline CNN | 0.6454 | 0.6492 | 1.068 |
 
-The Hybrid CNN-Transformer achieved the highest macro-F1 (0.9384) and accuracy (0.9308). The clear performance gap between the Baseline CNN and transfer-learning models confirms that pretrained features are essential for this dataset. Fine-tuning improved EfficientNetB0 performance by 0.1880 macro-F1 over the frozen variant.
+The EfficientNetB0 (fine-tune) achieved the highest macro-F1 (0.9288) and accuracy (0.9251). The clear performance gap between the Baseline CNN and transfer-learning models confirms that pretrained features are essential for this dataset. Fine-tuning improved EfficientNetB0 performance by 0.1929 macro-F1 over the frozen variant.
 
 ### Robustness Analysis
 
-**Table 2.** Robustness results for the Hybrid CNN-Transformer
+**Table 2.** Robustness results for the EfficientNetB0 (fine-tune)
 
 | Condition | Accuracy | Macro-F1 | Prec. | Recall | F1 Drop |
 |---|---:|---:|---:|---:|---:|
-| Clean Validation | 0.9308 | 0.9384 | 0.9371 | 0.9406 | — |
-| Gaussian Blur | 0.9242 | 0.9366 | 0.9346 | 0.9392 | 0.0018 |
-| Low Light | 0.8451 | 0.8411 | 0.8345 | 0.8618 | 0.0973 |
-| Gaussian Noise | 0.9325 | 0.9397 | 0.9374 | 0.9432 | −0.0013 |
-| Center Occlusion | 0.8830 | 0.8964 | 0.8971 | 0.8983 | 0.0420 |
+| Clean (Test Set) | 0.9251 | 0.9288 | 0.9264 | 0.9328 | — |
+| Gaussian Blur | 0.9119 | 0.9186 | 0.9149 | 0.9245 | 0.0102 |
+| Low Light | 0.8172 | 0.8297 | 0.8340 | 0.8496 | 0.0991 |
+| Gaussian Noise | 0.9273 | 0.9301 | 0.9295 | 0.9318 | −0.0013 |
+| Center Occlusion | 0.8348 | 0.8421 | 0.8303 | 0.8622 | 0.0867 |
 
-The model was highly resilient to blur and noise, with low light representing the most challenging condition (9.73% F1 drop). Center occlusion caused a moderate 4.20% F1 drop.
+The model was highly resilient to blur and noise, with low light representing the most challenging condition (9.91% F1 drop). Center occlusion caused a moderate 8.67% F1 drop.
 
 ### Explainability and Deployment
 
@@ -92,15 +92,15 @@ Grad-CAM heatmaps confirmed the model focused on disease-relevant leaf regions a
 
 ## DISCUSSION
 
-The Hybrid CNN-Transformer's 93.08% accuracy surpasses several comparable results on uncontrolled potato leaf datasets: Iqbal et al. (2024) achieved 87.50% with PLDNet, Ferdous et al. (2024) reported approximately 80% with DSCSkipNet, and Rahim et al. (2025) obtained 91.73% with a hybrid EfficientNetB0-Swin framework. This result supports the hypothesis that combining CNN-based local feature extraction with transformer-based global context modeling is particularly effective for field imagery where symptoms co-occur with background clutter.
+The EfficientNetB0 (fine-tune) model's 92.51% accuracy is competitive with several comparable results on uncontrolled potato leaf datasets: Iqbal et al. (2024) achieved 87.50% with PLDNet, Ferdous et al. (2024) reported approximately 80% with DSCSkipNet, and Rahim et al. (2025) obtained 91.73% with a hybrid EfficientNetB0-Swin framework. This result supports the effectiveness of domain-specific fine-tuning of pretrained EfficientNet features for field imagery where symptoms co-occur with background clutter.
 
-The robustness analysis extends beyond typical benchmarking by quantifying performance under multiple degradation types. The model's blur resilience (F1 drop: 0.0018) aligns with the EDA finding that 41.7% of training images already contain significant blur, suggesting implicit blur handling during training. The vulnerability to low-light conditions (F1 drop: 0.0973) identifies a concrete direction for future improvement through brightness-specific augmentation, consistent with challenges reported by Du et al. (2024).
+The robustness analysis extends beyond typical benchmarking by quantifying performance under multiple degradation types. The model's blur resilience (F1 drop: 0.0102) aligns with the EDA finding that 41.7% of training images already contain significant blur, suggesting implicit blur handling during training. The vulnerability to low-light conditions (F1 drop: 0.0991) identifies a concrete direction for future improvement through brightness-specific augmentation, consistent with challenges reported by Du et al. (2024).
 
 The study's primary strength is its integrated workflow combining dataset characterization, balanced training, comparative benchmarking, robustness analysis, explainability, and deployment preparation within a single reproducible pipeline. Limitations include the relatively small dataset size (3,076 images, 7 classes), use of simulated rather than naturally occurring degradations, and the absence of end-user field trials and cross-dataset generalization testing.
 
 ## CONCLUSION
 
-This study demonstrates that a Hybrid CNN-Transformer combining EfficientNetB0 feature extraction with a two-layer transformer encoder achieves robust potato leaf disease classification on uncontrolled field imagery, attaining 0.9308 accuracy and 0.9384 macro-F1. Robustness testing identified strong resilience to blur and noise while highlighting low-light conditions as the primary improvement target. Grad-CAM analysis confirmed disease-relevant attention patterns, and a complete deployment pipeline was delivered for practical agricultural use. Future work should extend the dataset, address low-light vulnerability through targeted augmentation, and conduct end-user field validation trials.
+This study demonstrates that fine-tuned EfficientNetB0 achieves robust potato leaf disease classification on uncontrolled field imagery, attaining 0.9251 accuracy and 0.9288 macro-F1, outperforming the Hybrid CNN-Transformer (0.9031 accuracy, 0.9079 macro-F1). Robustness testing identified strong resilience to blur and noise while highlighting low-light conditions as the primary improvement target. Grad-CAM analysis confirmed disease-relevant attention patterns, and a complete deployment pipeline was delivered for practical agricultural use. Future work should extend the dataset, address low-light vulnerability through targeted augmentation, and conduct end-user field validation trials.
 
 ## REFERENCES
 

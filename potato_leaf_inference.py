@@ -15,7 +15,7 @@ IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 
 DEFAULT_PROJECT_ROOT = Path(__file__).resolve().parent
-DEFAULT_CHECKPOINT = DEFAULT_PROJECT_ROOT / "artifacts" / "phase_2_benchmarking" / "models" / "hybrid_cnn_transformer_best.pt"
+DEFAULT_CHECKPOINT = DEFAULT_PROJECT_ROOT / "artifacts" / "phase_2_benchmarking" / "models" / "efficientnet_b0_finetune_best.pt"
 DEFAULT_CLASS_INFO = DEFAULT_PROJECT_ROOT / "submission_ready" / "final_package" / "deployment" / "class_info.json"
 
 DEFAULT_CLASS_NAMES = [
@@ -37,6 +37,40 @@ DEFAULT_DISEASE_INFO = {
     "Phytopthora": "Phytophthora symptoms often include dark blight lesions and rapid tissue collapse.",
     "Virus": "Virus infection may produce mottling, mosaic patterns, curling, or stunted growth.",
 }
+
+
+class EfficientNetTransfer(nn.Module):
+    """EfficientNetB0 transfer learning model via timm."""
+    def __init__(self, n_classes: int,
+                 fine_tune: bool = False,
+                 unfreeze_n_blocks: int = 2):
+        super().__init__()
+        self.backbone = timm.create_model(
+            "efficientnet_b0", pretrained=True,
+            num_classes=0, global_pool=""
+        )
+        self.pool = nn.AdaptiveAvgPool2d(1)
+        self.head = nn.Sequential(
+            nn.Linear(1280, 256), nn.ReLU(),
+            nn.Dropout(0.4),
+            nn.Linear(256, n_classes)
+        )
+        for p in self.backbone.parameters():
+            p.requires_grad = False
+        if fine_tune:
+            blocks = list(self.backbone.blocks)
+            for block_group in blocks[-unfreeze_n_blocks:]:
+                for p in block_group.parameters():
+                    p.requires_grad = True
+            for p in self.backbone.conv_head.parameters():
+                p.requires_grad = True
+            for p in self.backbone.bn2.parameters():
+                p.requires_grad = True
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.backbone(x)
+        x = self.pool(x).flatten(1)
+        return self.head(x)
 
 
 class LearnablePositionalEncoding(nn.Module):
@@ -144,7 +178,7 @@ def load_class_info(class_info_path: str | Path | None = None) -> dict:
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
     return {
-        "final_model": "Hybrid CNN-Transformer",
+        "final_model": "EfficientNetB0 (fine-tune)",
         "class_names": DEFAULT_CLASS_NAMES,
         "class_to_idx": {name: idx for idx, name in enumerate(DEFAULT_CLASS_NAMES)},
         "disease_info": DEFAULT_DISEASE_INFO,
@@ -161,8 +195,12 @@ def load_model(
     class_names = info.get("class_names", DEFAULT_CLASS_NAMES)
     ckpt_path = Path(checkpoint_path) if checkpoint_path else Path(info.get("checkpoint_path", DEFAULT_CHECKPOINT))
     active_device = get_device(device)
-    model = HybridCNNTransformer(n_classes=len(class_names), freeze_backbone=False).to(active_device)
-    state_dict = torch.load(ckpt_path, map_location=active_device)
+    model_name = info.get("final_model", "EfficientNetB0 (fine-tune)")
+    if "hybrid" in model_name.lower():
+        model = HybridCNNTransformer(n_classes=len(class_names), freeze_backbone=False).to(active_device)
+    else:
+        model = EfficientNetTransfer(n_classes=len(class_names), fine_tune=True).to(active_device)
+    state_dict = torch.load(ckpt_path, map_location=active_device, weights_only=True)
     model.load_state_dict(state_dict)
     model.eval()
     return model, active_device, info

@@ -1,8 +1,8 @@
-class,train_original,train_balanced,val_count
-Bacteria,456,748,113
-Fungi,599,748,149
-Healthy,161,748,40
-Nematode,55,748,13
-Pest,489,748,122
-Phytopthora,278,748,69
-Virus,426,748,106
+class,total_images,train_original,train_balanced,val_count,test_count
+Bacteria,569,399,748,85,85
+Fungi,748,524,748,112,112
+Healthy,201,141,748,30,30
+Nematode,68,48,748,10,10
+Pest,611,427,748,92,92
+Phytopthora,347,243,748,52,52
+Virus,532,372,748,80,80

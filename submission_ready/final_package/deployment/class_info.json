@@ -1,5 +1,5 @@
 {
-  "final_model": "Hybrid CNN-Transformer",
+  "final_model": "EfficientNetB0 (fine-tune)",
   "class_names": [
     "Bacteria",
     "Fungi",
@@ -27,5 +27,5 @@
     "Phytopthora": "Phytophthora symptoms often include dark blight lesions and rapid tissue collapse.",
     "Virus": "Virus infection may produce mottling, mosaic patterns, curling, or stunted growth."
   },
-  "checkpoint_path": "artifacts/phase_2_benchmarking/models/hybrid_cnn_transformer_best.pt"
+  "checkpoint_path": "artifacts/phase_2_benchmarking/models/efficientnet_b0_finetune_best.pt"
 }

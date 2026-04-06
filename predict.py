@@ -34,7 +34,7 @@ def main() -> None:
         top_k=args.top_k,
     )
 
-    print(f"Model: {info.get('final_model', 'Hybrid CNN-Transformer')}")
+    print(f"Model: {info.get('final_model', 'EfficientNetB0 (fine-tune)')}")
     print(f"Device: {device}")
     print(f"Image: {prediction['image_path']}")
     print(f"Predicted class: {prediction['predicted_class']}")

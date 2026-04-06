@@ -173,6 +173,35 @@ def get_val_transforms() -> transforms.Compose:
     )
 
 
+# ── Input brightness validation ──────────────────────────────────────────────
+# Low-light is the primary robustness weakness (9.91% F1 drop in robustness analysis).
+LOW_BRIGHTNESS_THRESH = 60.0
+HIGH_BRIGHTNESS_THRESH = 220.0
+
+
+def check_image_brightness(
+    img: Image.Image,
+    low_thresh: float = LOW_BRIGHTNESS_THRESH,
+    high_thresh: float = HIGH_BRIGHTNESS_THRESH,
+) -> dict:
+    """Check mean brightness and flag if outside safe operational range."""
+    gray = np.array(img.convert("L"), dtype=np.float32)
+    mean_brightness = float(gray.mean())
+    if mean_brightness < low_thresh:
+        level, msg = "WARNING_LOW_LIGHT", (
+            f"Mean brightness {mean_brightness:.1f} < {low_thresh}. "
+            "Low-light is the top robustness weakness — predictions may be unreliable."
+        )
+    elif mean_brightness > high_thresh:
+        level, msg = "WARNING_OVEREXPOSED", (
+            f"Mean brightness {mean_brightness:.1f} > {high_thresh}. "
+            "Overexposed image — check source quality."
+        )
+    else:
+        level, msg = "OK", f"Brightness {mean_brightness:.1f} is within safe range."
+    return {"mean_brightness": round(mean_brightness, 2), "level": level, "message": msg}
+
+
 def load_class_info(class_info_path: str | Path | None = None) -> dict:
     path = Path(class_info_path) if class_info_path else DEFAULT_CLASS_INFO
     if path.exists():
@@ -217,8 +246,11 @@ def predict_pil_image(
     class_names: list[str],
     disease_info: dict[str, str],
     top_k: int = 3,
+    validate_brightness: bool = True,
 ) -> dict:
-    input_tensor = preprocess_pil(img).to(device)
+    rgb_img = img.convert("RGB")
+    brightness_check = check_image_brightness(rgb_img) if validate_brightness else None
+    input_tensor = preprocess_pil(rgb_img).to(device)
     with torch.no_grad():
         logits = model(input_tensor)
         probs = torch.softmax(logits, dim=1).cpu().numpy()[0]
@@ -234,11 +266,14 @@ def predict_pil_image(
                 "disease_note": disease_info.get(class_name, ""),
             }
         )
-    return {
+    result = {
         "predicted_class": predictions[0]["class_name"],
         "confidence": predictions[0]["probability"],
         "top_k": predictions,
     }
+    if brightness_check is not None:
+        result["brightness_check"] = brightness_check
+    return result
 
 
 def predict_image(

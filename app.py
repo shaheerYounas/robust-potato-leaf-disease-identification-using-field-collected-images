@@ -51,6 +51,11 @@ def main() -> None:
     col1, col2 = st.columns([1.2, 1])
     with col1:
         st.image(image, caption="Uploaded image", use_container_width=True)
+        brightness = prediction.get("brightness_check")
+        if brightness and brightness["level"] == "WARNING_LOW_LIGHT":
+            st.warning(f"Low-light warning: {brightness['message']}")
+        elif brightness and brightness["level"] == "WARNING_OVEREXPOSED":
+            st.warning(f"Overexposure warning: {brightness['message']}")
     with col2:
         st.subheader("Prediction")
         st.metric("Predicted class", prediction["predicted_class"])

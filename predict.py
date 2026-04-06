@@ -37,6 +37,11 @@ def main() -> None:
     print(f"Model: {info.get('final_model', 'EfficientNetB0 (fine-tune)')}")
     print(f"Device: {device}")
     print(f"Image: {prediction['image_path']}")
+
+    brightness = prediction.get("brightness_check")
+    if brightness and brightness["level"] != "OK":
+        print(f"\n** {brightness['level']}: {brightness['message']} **\n")
+
     print(f"Predicted class: {prediction['predicted_class']}")
     print(f"Confidence: {prediction['confidence']:.4f}")
     print("")

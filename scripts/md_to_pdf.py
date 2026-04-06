@@ -4,10 +4,10 @@ import argparse
 import html
 import re
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, StyleSheet1, getSampleStyleSheet
 from reportlab.lib.units import cm
@@ -21,69 +21,6 @@ from reportlab.platypus import (
     Table,
     TableStyle,
 )
-
-
-def build_styles() -> StyleSheet1:
-    styles = getSampleStyleSheet()
-    styles.add(
-        ParagraphStyle(
-            name="BodySmallGap",
-            parent=styles["BodyText"],
-            fontName="Times-Roman",
-            fontSize=11,
-            leading=15,
-            spaceAfter=8,
-        )
-    )
-    styles.add(
-        ParagraphStyle(
-            name="TitleCenter",
-            parent=styles["Title"],
-            fontName="Times-Bold",
-            fontSize=18,
-            leading=22,
-            alignment=TA_CENTER,
-            spaceAfter=14,
-        )
-    )
-    styles.add(
-        ParagraphStyle(
-            name="Heading1Report",
-            parent=styles["Heading1"],
-            fontName="Times-Bold",
-            fontSize=15,
-            leading=19,
-            spaceBefore=12,
-            spaceAfter=8,
-        )
-    )
-    styles.add(
-        ParagraphStyle(
-            name="Heading2Report",
-            parent=styles["Heading2"],
-            fontName="Times-Bold",
-            fontSize=13,
-            leading=17,
-            spaceBefore=10,
-            spaceAfter=6,
-        )
-    )
-    styles.add(
-        ParagraphStyle(
-            name="CodeBlock",
-            parent=styles["Code"],
-            fontName="Courier",
-            fontSize=9,
-            leading=12,
-            leftIndent=12,
-            rightIndent=12,
-            backColor=colors.HexColor("#F5F5F5"),
-            borderPadding=6,
-            spaceBefore=4,
-            spaceAfter=8,
-        )
-    )
-    return styles
 
 
 INLINE_PATTERNS = [
@@ -105,7 +42,185 @@ def paragraph(text: str, style: ParagraphStyle) -> Paragraph:
     return Paragraph(inline_markup(text), style)
 
 
-def parse_table(lines: List[str]) -> list[list[str]]:
+def paragraph_raw(text: str, style: ParagraphStyle) -> Paragraph:
+    return Paragraph(text, style)
+
+
+HEADING_NUMBER_RE = re.compile(r"^\d+(?:\.\d+)*\.?\s*")
+
+
+def build_styles(template_mode: bool) -> StyleSheet1:
+    styles = getSampleStyleSheet()
+
+    if template_mode:
+        styles.add(
+            ParagraphStyle(
+                name="ReportBody",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=12,
+                leading=13.8,
+                alignment=TA_JUSTIFY,
+                spaceAfter=6,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportTitle",
+                parent=styles["Title"],
+                fontName="Times-Bold",
+                fontSize=12,
+                leading=13.8,
+                alignment=TA_CENTER,
+                spaceAfter=10,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportHeading",
+                parent=styles["Heading1"],
+                fontName="Times-Bold",
+                fontSize=12,
+                leading=13.8,
+                alignment=TA_LEFT,
+                spaceBefore=8,
+                spaceAfter=4,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportSubHeading",
+                parent=styles["Heading2"],
+                fontName="Times-Bold",
+                fontSize=12,
+                leading=13.8,
+                alignment=TA_LEFT,
+                spaceBefore=8,
+                spaceAfter=4,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportMetaCenter",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=12,
+                leading=13.8,
+                alignment=TA_CENTER,
+                spaceAfter=2,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportKeywords",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=11,
+                leading=12.65,
+                alignment=TA_JUSTIFY,
+                spaceAfter=6,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportCode",
+                parent=styles["Code"],
+                fontName="Courier",
+                fontSize=9,
+                leading=11,
+                leftIndent=12,
+                rightIndent=12,
+                backColor=colors.HexColor("#F5F5F5"),
+                borderPadding=5,
+                spaceBefore=4,
+                spaceAfter=6,
+            )
+        )
+    else:
+        styles.add(
+            ParagraphStyle(
+                name="ReportBody",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=11,
+                leading=15,
+                spaceAfter=8,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportTitle",
+                parent=styles["Title"],
+                fontName="Times-Bold",
+                fontSize=18,
+                leading=22,
+                alignment=TA_CENTER,
+                spaceAfter=14,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportHeading",
+                parent=styles["Heading1"],
+                fontName="Times-Bold",
+                fontSize=15,
+                leading=19,
+                spaceBefore=12,
+                spaceAfter=8,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportSubHeading",
+                parent=styles["Heading2"],
+                fontName="Times-Bold",
+                fontSize=13,
+                leading=17,
+                spaceBefore=10,
+                spaceAfter=6,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportMetaCenter",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=11,
+                leading=14,
+                alignment=TA_CENTER,
+                spaceAfter=4,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportKeywords",
+                parent=styles["BodyText"],
+                fontName="Times-Roman",
+                fontSize=11,
+                leading=14,
+                spaceAfter=8,
+            )
+        )
+        styles.add(
+            ParagraphStyle(
+                name="ReportCode",
+                parent=styles["Code"],
+                fontName="Courier",
+                fontSize=9,
+                leading=12,
+                leftIndent=12,
+                rightIndent=12,
+                backColor=colors.HexColor("#F5F5F5"),
+                borderPadding=6,
+                spaceBefore=4,
+                spaceAfter=8,
+            )
+        )
+
+    return styles
+
+
+def parse_table(lines: list[str]) -> list[list[str]]:
     rows: list[list[str]] = []
     for line in lines:
         stripped = line.strip()
@@ -118,37 +233,63 @@ def parse_table(lines: List[str]) -> list[list[str]]:
     return rows
 
 
-def table_flowable(rows: list[list[str]], styles: StyleSheet1) -> Table:
+def table_flowable(rows: list[list[str]], styles: StyleSheet1, template_mode: bool) -> Table:
     max_cols = max(len(row) for row in rows)
     normalized = [row + [""] * (max_cols - len(row)) for row in rows]
     data = []
     for ridx, row in enumerate(normalized):
-        row_style = styles["Heading2Report"] if ridx == 0 else styles["BodySmallGap"]
+        row_style = styles["ReportSubHeading"] if ridx == 0 else styles["ReportBody"]
         data.append([paragraph(cell or " ", row_style) for cell in row])
 
     table = Table(data, repeatRows=1, hAlign="LEFT")
     table.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#E8EEF7")),
+                ("BACKGROUND", (0, 0), (-1, 0), colors.white if template_mode else colors.HexColor("#E8EEF7")),
                 ("TEXTCOLOR", (0, 0), (-1, 0), colors.black),
-                ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#AAB4C0")),
+                ("GRID", (0, 0), (-1, -1), 0.6 if template_mode else 0.5, colors.black if template_mode else colors.HexColor("#AAB4C0")),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("TOPPADDING", (0, 0), (-1, -1), 6),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-                ("LEFTPADDING", (0, 0), (-1, -1), 6),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 6),
-                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F9FBFD")]),
+                ("TOPPADDING", (0, 0), (-1, -1), 4 if template_mode else 6),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 4 if template_mode else 6),
+                ("LEFTPADDING", (0, 0), (-1, -1), 5 if template_mode else 6),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 5 if template_mode else 6),
+                ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.white] if template_mode else [colors.white, colors.HexColor("#F9FBFD")]),
             ]
         )
     )
     return table
 
 
-def build_story(md_text: str, styles: StyleSheet1):
+def convert_keywords_line(text: str) -> str:
+    parts = text.split(":", 1)
+    if len(parts) == 2:
+        return f"<b>{inline_markup(parts[0])}:</b> {inline_markup(parts[1])}"
+    return inline_markup(text)
+
+
+def add_template_front_matter(story, styles: StyleSheet1, metadata: argparse.Namespace) -> None:
+    if metadata.author:
+        story.append(paragraph(metadata.author, styles["ReportMetaCenter"]))
+    if metadata.affiliation:
+        story.append(paragraph(metadata.affiliation, styles["ReportMetaCenter"]))
+    if metadata.email:
+        story.append(paragraph_raw(f"<b>e-mail:</b> {inline_markup(metadata.email)}", styles["ReportMetaCenter"]))
+    if metadata.correspondence:
+        story.append(
+            paragraph_raw(
+                f"<b>Correspondence:</b> {inline_markup(metadata.correspondence)}",
+                styles["ReportMetaCenter"],
+            )
+        )
+    if metadata.author or metadata.affiliation or metadata.email or metadata.correspondence:
+        story.append(Spacer(1, 0.15 * cm))
+
+
+def build_story(md_text: str, styles: StyleSheet1, template_mode: bool, metadata: argparse.Namespace):
     story = []
     lines = md_text.splitlines()
     i = 0
+    seen_title = False
 
     while i < len(lines):
         line = lines[i]
@@ -169,7 +310,7 @@ def build_story(md_text: str, styles: StyleSheet1):
             while i < len(lines) and not lines[i].strip().startswith("```"):
                 code_lines.append(lines[i])
                 i += 1
-            story.append(Paragraph("<br/>".join(html.escape(l) for l in code_lines) or " ", styles["CodeBlock"]))
+            story.append(Paragraph("<br/>".join(html.escape(l) for l in code_lines) or " ", styles["ReportCode"]))
             story.append(Spacer(1, 0.1 * cm))
             i += 1
             continue
@@ -181,23 +322,44 @@ def build_story(md_text: str, styles: StyleSheet1):
                 i += 1
             rows = parse_table(table_lines)
             if rows:
-                story.append(table_flowable(rows, styles))
-                story.append(Spacer(1, 0.2 * cm))
+                story.append(table_flowable(rows, styles, template_mode))
+                story.append(Spacer(1, 0.15 * cm))
             continue
 
         if stripped.startswith("# "):
-            style = styles["TitleCenter"] if not story else styles["Heading1Report"]
-            story.append(paragraph(stripped[2:], style))
+            heading_text = stripped[2:]
+            if not seen_title:
+                story.append(paragraph(heading_text, styles["ReportTitle"]))
+                if template_mode:
+                    add_template_front_matter(story, styles, metadata)
+                seen_title = True
+            else:
+                if template_mode:
+                    heading_text = heading_text.upper()
+                story.append(paragraph(heading_text, styles["ReportHeading"]))
             i += 1
             continue
 
         if stripped.startswith("## "):
-            story.append(paragraph(stripped[3:], styles["Heading1Report"]))
+            heading_text = stripped[3:]
+            if template_mode:
+                heading_text = HEADING_NUMBER_RE.sub("", heading_text).upper()
+                if heading_text in {"METHODS", "MATERIALS AND METHODS"}:
+                    heading_text = "RESEARCH METHODS"
+            story.append(paragraph(heading_text, styles["ReportHeading"]))
             i += 1
             continue
 
         if stripped.startswith("### "):
-            story.append(paragraph(stripped[4:], styles["Heading2Report"]))
+            heading_text = stripped[4:]
+            if template_mode:
+                heading_text = HEADING_NUMBER_RE.sub("", heading_text)
+            story.append(paragraph(heading_text, styles["ReportSubHeading"]))
+            i += 1
+            continue
+
+        if re.match(r"^keywords\s*:", stripped, re.IGNORECASE):
+            story.append(Paragraph(convert_keywords_line(stripped), styles["ReportKeywords"]))
             i += 1
             continue
 
@@ -214,23 +376,19 @@ def build_story(md_text: str, styles: StyleSheet1):
                     match = re.match(r"^[-*]\s+(.*)", current)
                 if not match:
                     break
-                items.append(
-                    ListItem(
-                        paragraph(match.group(1), styles["BodySmallGap"]),
-                        leftIndent=12,
-                    )
-                )
+                items.append(ListItem(paragraph(match.group(1), styles["ReportBody"]), leftIndent=10))
                 i += 1
             story.append(
                 ListFlowable(
                     items,
                     bulletType="1" if is_numbered else "bullet",
                     start="1",
-                    leftIndent=18,
+                    leftIndent=16 if template_mode else 18,
                     bulletFontName="Times-Roman",
+                    bulletFontSize=12 if template_mode else 11,
                 )
             )
-            story.append(Spacer(1, 0.1 * cm))
+            story.append(Spacer(1, 0.08 * cm))
             continue
 
         para_lines = [stripped]
@@ -242,28 +400,42 @@ def build_story(md_text: str, styles: StyleSheet1):
                 or candidate.startswith(("#", "|", "```", "- ", "* "))
                 or re.match(r"^\d+\.\s+", candidate)
                 or candidate == "---"
+                or re.match(r"^keywords\s*:", candidate, re.IGNORECASE)
             ):
                 break
             para_lines.append(candidate)
             i += 1
-        story.append(paragraph(" ".join(para_lines), styles["BodySmallGap"]))
+        story.append(paragraph(" ".join(para_lines), styles["ReportBody"]))
 
     return story
 
 
-def convert_markdown_to_pdf(src: Path, dst: Path) -> None:
-    styles = build_styles()
-    doc = SimpleDocTemplate(
-        str(dst),
-        pagesize=A4,
-        leftMargin=2.2 * cm,
-        rightMargin=2.2 * cm,
-        topMargin=2.0 * cm,
-        bottomMargin=2.0 * cm,
-        title=src.stem.replace("_", " "),
-        author="OpenAI Codex",
-    )
-    story = build_story(src.read_text(encoding="utf-8"), styles)
+def convert_markdown_to_pdf(src: Path, dst: Path, template_mode: bool, metadata: argparse.Namespace) -> None:
+    styles = build_styles(template_mode)
+    if template_mode:
+        doc = SimpleDocTemplate(
+            str(dst),
+            pagesize=A4,
+            leftMargin=2.49 * cm,
+            rightMargin=2.01 * cm,
+            topMargin=3.0 * cm,
+            bottomMargin=2.01 * cm,
+            title=src.stem.replace("_", " "),
+            author="OpenAI Codex",
+        )
+    else:
+        doc = SimpleDocTemplate(
+            str(dst),
+            pagesize=A4,
+            leftMargin=2.2 * cm,
+            rightMargin=2.2 * cm,
+            topMargin=2.0 * cm,
+            bottomMargin=2.0 * cm,
+            title=src.stem.replace("_", " "),
+            author="OpenAI Codex",
+        )
+
+    story = build_story(src.read_text(encoding="utf-8"), styles, template_mode, metadata)
     doc.build(story)
 
 
@@ -274,10 +446,17 @@ def default_output(src: Path) -> Path:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Convert simple Markdown reports to PDF.")
     parser.add_argument("inputs", nargs="+", help="Markdown files to convert.")
+    parser.add_argument("--output-dir", help="Optional directory for generated PDFs. Defaults to each source directory.")
     parser.add_argument(
-        "--output-dir",
-        help="Optional directory for generated PDFs. Defaults to each source directory.",
+        "--template",
+        choices=["default", "bip"],
+        default="default",
+        help="Apply template-specific formatting. Use 'bip' for the Final Report Template layout.",
     )
+    parser.add_argument("--author", help="Optional author line for the title block.")
+    parser.add_argument("--affiliation", help="Optional affiliation line for the title block.")
+    parser.add_argument("--email", help="Optional email line for the title block.")
+    parser.add_argument("--correspondence", help="Optional correspondence line for the title block.")
     return parser.parse_args()
 
 
@@ -293,11 +472,12 @@ def iter_targets(inputs: Iterable[str], output_dir: str | None):
 
 def main() -> int:
     args = parse_args()
+    template_mode = args.template == "bip"
     for src, dst in iter_targets(args.inputs, args.output_dir):
         if not src.exists():
             raise FileNotFoundError(f"Input file not found: {src}")
         dst.parent.mkdir(parents=True, exist_ok=True)
-        convert_markdown_to_pdf(src, dst)
+        convert_markdown_to_pdf(src, dst, template_mode, args)
         print(f"Created {dst}")
     return 0
 

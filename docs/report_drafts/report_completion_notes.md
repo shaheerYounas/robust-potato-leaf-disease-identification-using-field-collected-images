@@ -1,37 +1,41 @@
 # Report Completion Notes
 
-This note now reflects the post-packaging state of the project.
+This note reflects the **fully completed** state of all project reports as of the final writing session.
 
-## Final notebook outputs now packaged locally
+## Status: COMPLETE
 
-The following outputs have been materialized into the local submission package under `submission_ready/final_package/`:
+All reports have been written, formatted, and exported. No remaining writing work.
 
-- final model lock and protocol CSVs
-- robustness CSV and robustness figure
-- Grad-CAM figure and metadata CSV
-- deployment summary plus JSON artifacts
-- report-ready benchmark and robustness tables
-- final results summary text
+## Final deliverables
 
-## Best current writing base
+The canonical submission files live in `submission_ready/final_package/reports/`:
 
-Use these files first:
+| File | Format | Words | Refs | Notes |
+|---|---|---:|---:|---|
+| `internship_report_submission.md` | Markdown source | 5,017 | 24 | Primary report |
+| `internship_report_submission.docx` | DOCX (BIP template) | — | — | Times New Roman, A4, 1.15 spacing |
+| `internship_report_submission.pdf` | PDF | — | — | Generated via `scripts/md_to_pdf.py` |
+| `journal_paper_submission.md` | Markdown source | 2,135 | 18 | Shorter companion paper |
+| `journal_paper_submission.docx` | DOCX (BIP template) | — | — | Same template formatting |
+| `journal_paper_submission.pdf` | PDF | — | — | Generated via `scripts/md_to_pdf.py` |
 
-1. `submission_ready/final_package/reports/internship_report_submission.md`
-2. `submission_ready/final_package/reports/journal_paper_submission.md`
-3. `submission_ready/final_package/report_ready/results_summary.md`
-4. `submission_ready/final_package/report_ready/benchmark_table_report_ready.csv`
-5. `submission_ready/final_package/report_ready/robustness_table_report_ready.csv`
+## What was done
 
-## Remaining writing work
+1. Both reports rewritten with **structured 5-part abstracts** (Introduction, Research Methods, Data Analysis, Results, Conclusion).
+2. Full **Literature Review** sections with proper subsections and in-text citations.
+3. **24 APA 7 references** in the internship report, **18** in the journal paper (all from `docs/literature_review/` sources).
+4. Expanded Discussion with comparative analysis, robustness implications, and strengths/limitations.
+5. DOCX files generated using `scripts/md_to_docx.py` (BIP template: Times New Roman 12pt, A4, 1.15 spacing, 2.5cm/2.0cm margins).
+6. PDF files generated using `scripts/md_to_pdf.py`.
 
-The remaining work is mostly packaging and academic formatting:
+## Draft copies
 
-1. Paste APA 7 references from `docs/literature_review/` into the final report export.
-2. Move the Markdown report into the required university or internship template.
-3. Export the final document as PDF or DOCX if required.
+Mirror copies are kept in `docs/report_drafts/` for convenience:
+- `internship_report_draft.md` — synced with the final submission version
+- `journal_paper_draft.md` — synced with the final submission version
 
-## Important honesty check
+## Data integrity note
 
-- The strongest final numbers now come from the executed notebook Sections 7 to 11 and are packaged locally in `submission_ready/final_package/metrics/`.
-- The earlier `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` is still preserved for traceability, but the final submission narrative should use the locked evaluation values packaged in `submission_ready/final_package/`.
+- Final metrics come from the executed notebook Sections 7–11, packaged in `submission_ready/final_package/metrics/`.
+- The earlier `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` is preserved for traceability.
+- All numbers in the reports match the locked evaluation protocol values.

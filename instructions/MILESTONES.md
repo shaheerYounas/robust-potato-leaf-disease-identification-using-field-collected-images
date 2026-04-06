@@ -6,37 +6,36 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 
 ## Audit Snapshot
 
-- Audit date: 2026-04-04
+- Audit date: 2026-04-06
 - Workspace root: `C:\Users\Shaheer\Desktop\Bilal-Advance Practice`
 - Project level: final-year undergraduate internship / capstone style AI project
 - Mandatory workflow rule:
   - All code-related project work must stay in the existing main notebook: `Notebook/Advance_Practice_Potato_Leaf.ipynb`.
 - Main reality check:
-  - Literature review research is complete, but the final written report section is still pending.
-  - Core EDA is complete and already strong enough for project use.
-  - Core benchmarking and model comparison were completed and synced into local artifacts.
-  - The strongest project evidence lives in the main notebook plus the saved local benchmark artifacts.
-  - Robustness, XAI, deployment, and final report packaging are still largely remaining.
-  - The project is now in the finalization stage, not the early experimentation stage.
+  - Literature review research is complete. Report-ready literature review sections with APA 7 citations have been written.
+  - Core EDA is complete and strong.
+  - Core benchmarking, final evaluation, robustness, explainability, and deployment are all complete.
+  - Both internship report and journal paper drafts are complete with structured abstracts, 24 APA 7 references, full sections, and proper academic formatting.
+  - The project is now in the final formatting stage — DOCX template conversion is the remaining step.
 
 ## Progress Summary
 
 | Area | Status | Estimated Progress | Notes |
 |---|---|---:|---|
-| Project definition and planning | Complete | 90% | Brief, template, proposed method, and planning documents exist |
-| Literature review research | Complete | 100% | Research reading and synthesis work is done; report-ready writing is still pending |
-| Literature review write-up | Not started | 15% | Source material exists, but it has not yet been turned into the final document section |
-| Dataset understanding and EDA | Complete | 95% | EDA plots and summary CSV exist locally; only selective strengthening/report integration remains |
-| Preprocessing and balancing | Strong | 85% | Balanced augmented dataset and preprocessing summary exist |
-| Model benchmarking (scientific work) | Strong | 90% | Four-model benchmark results exist with saved local metrics, reports, curves, and confusion matrices |
-| Model benchmarking (workspace packaging) | Strong | 85% | Benchmark CSVs, reports, plots, and checkpoints are now present locally; large checkpoints remain local-only due to GitHub limits |
-| Final-quality evaluation | In progress | 70% | Model comparison is strong, but no locked final test protocol, robustness suite, or XAI yet |
-| Robustness analysis | Not started | 5% | Problem identified through EDA, but no degradation experiments yet |
-| Explainability | Not started | 0% | No Grad-CAM or Score-CAM files yet |
-| Deployment | Not started | 0% | No `predict.py`, no `app.py`, no ONNX pipeline |
-| Final report and submission packaging | Early stage | 30% | Background material exists, but the actual integrated report and clean package are still pending |
-| Overall project progress | In progress | 70% | Research, EDA, and benchmarking are mostly complete; finalization work remains |
-| Submission-ready workspace | In progress | 50% | Strong raw material and notebook evidence exist, but the final deliverable package is incomplete |
+| Project definition and planning | Complete | 100% | Brief, template, proposed method, and planning documents exist |
+| Literature review research | Complete | 100% | Research reading and synthesis work is done |
+| Literature review write-up | Complete | 95% | Full lit review sections written in both reports with APA 7 citations; final template formatting pending |
+| Dataset understanding and EDA | Complete | 95% | EDA plots and summary CSV exist locally |
+| Preprocessing and balancing | Complete | 95% | Balanced augmented dataset and preprocessing summary exist |
+| Model benchmarking (scientific work) | Complete | 95% | Four-model benchmark results with saved metrics, reports, curves, and confusion matrices |
+| Model benchmarking (workspace packaging) | Complete | 95% | Benchmark CSVs, reports, plots, and checkpoints present locally |
+| Final-quality evaluation | Complete | 95% | Locked final evaluation protocol with ranked model selection |
+| Robustness analysis | Complete | 95% | 5-condition degradation testing done with metrics saved |
+| Explainability | Complete | 95% | Grad-CAM heatmaps generated for multiple classes |
+| Deployment | Complete | 90% | predict.py, app.py, class_info.json, ONNX export available |
+| Final report and submission packaging | Near complete | 90% | Both internship and journal reports rewritten with structured abstracts, APA 7 refs; DOCX conversion pending |
+| Overall project progress | Near complete | 93% | All technical and academic work done; only template formatting remains |
+| Submission-ready workspace | Near complete | 90% | Strong final package exists; DOCX template conversion is the last step |
 
 ## Evidence Already Present
 
@@ -102,7 +101,7 @@ Exit criteria:
 
 ### M2. Literature review and problem framing
 
-Status: Research complete, writing pending
+Status: Complete
 
 Completed:
 
@@ -111,13 +110,14 @@ Completed:
 - [x] Identify model trends: CNNs, transfer learning, hybrids, transformers
 - [x] Record deployment/reproducibility gaps in prior work
 - [x] Finish the research-side literature review work
+- [x] Convert the completed research notes into report-ready academic writing
+- [x] Merge the best literature findings into the final report structure
+- [x] Clean out irrelevant papers from the final narrative
+- [x] Convert literature summary into report-ready citations and arguments
 
 Remaining:
 
-- [ ] Convert the completed research notes into report-ready academic writing
-- [ ] Merge the best literature findings into the final report structure
-- [ ] Clean out irrelevant papers from the final narrative
-- [ ] Convert literature summary into report-ready citations and arguments
+- [ ] Convert final Markdown reports to institutional DOCX template
 
 Exit criteria:
 
@@ -197,21 +197,22 @@ Exit criteria:
 
 ### M5b. Final evaluation quality
 
-Status: In progress
+Status: Complete
 
 Completed:
 
 - [x] Run meaningful model comparison across four model families
 - [x] Evaluate accuracy and macro-F1
 - [x] Measure latency for model comparison
+- [x] Define a locked final evaluation protocol
+- [x] Confirm reported numbers are validation-holdout based
+- [x] Add robustness evidence (5 degradation conditions)
+- [x] Add explainability evidence (Grad-CAM)
+- [x] Turn notebook evaluation outputs into report-ready tables and figures
 
 Remaining:
 
-- [ ] Define a locked final evaluation protocol
-- [ ] Confirm whether current reported numbers are validation-only or final-test numbers in the final narrative
-- [ ] Add robustness evidence
-- [ ] Add explainability evidence
-- [ ] Turn notebook evaluation outputs into report-ready tables and figures
+- (none)
 
 Exit criteria:
 
@@ -219,19 +220,20 @@ Exit criteria:
 
 ### M6. Robustness improvement
 
-Status: Not started
+Status: Complete
 
 Completed:
 
 - [x] Use EDA to identify realistic threats: blur, clutter, class imbalance, field variability
+- [x] Add stronger augmentation policy for robustness
+- [x] Create synthetic degradation tests for blur, low light, noise, and occlusion
+- [x] Measure accuracy and F1 drop under each degradation
+- [x] Save robustness results to a CSV
+- [x] Compare clean versus degraded performance in plots/tables
 
 Remaining:
 
-- [ ] Add stronger augmentation policy for robustness
-- [ ] Create synthetic degradation tests for blur, low light, noise, and occlusion
-- [ ] Measure accuracy and F1 drop under each degradation
-- [ ] Save robustness results to a CSV
-- [ ] Compare clean versus degraded performance in plots/tables
+- (none)
 
 Exit criteria:
 
@@ -239,18 +241,17 @@ Exit criteria:
 
 ### M7. Explainability
 
-Status: Not started
+Status: Complete
 
 Completed:
 
-- [ ] None yet
+- [x] Implement Grad-CAM for the best model
+- [x] Generate class-wise visual explanations
+- [x] Write qualitative interpretation of whether the model focuses on lesions
 
 Remaining:
 
-- [ ] Implement Grad-CAM for the best model
-- [ ] Generate class-wise visual explanations
-- [ ] Write qualitative interpretation of whether the model focuses on lesions
-- [ ] Keep Score-CAM optional unless time remains
+- (none — Score-CAM left optional)
 
 Exit criteria:
 
@@ -258,20 +259,20 @@ Exit criteria:
 
 ### M8. Deployment and optimization
 
-Status: Not started
+Status: Complete
 
 Completed:
 
-- [ ] None yet
+- [x] Export the best model to ONNX if feasible
+- [x] Measure inference latency for the selected deployment path
+- [x] Build `predict.py` for single-image inference
+- [x] Build `app.py` for a simple Streamlit demo
+- [x] Add static disease information for end-user interpretation
+- [x] Document setup and run steps
 
 Remaining:
 
-- [ ] Export the best model to ONNX if feasible
-- [ ] Measure inference latency for the selected deployment path
-- [ ] Build `predict.py` for single-image inference
-- [ ] Build `app.py` for a simple Streamlit demo
-- [ ] Add static disease information for end-user interpretation
-- [ ] Document setup and run steps
+- (none)
 
 Exit criteria:
 
@@ -279,21 +280,23 @@ Exit criteria:
 
 ### M9. Final evaluation and reporting
 
-Status: Writing not started, evidence collection strong
+Status: Complete (DOCX template conversion pending)
 
 Completed:
 
 - [x] Collect major ingredients needed for report writing
 - [x] Identify final-report template and expected structure
+- [x] Define held-out final test evaluation
+- [x] Produce final metrics tables and final model comparison
+- [x] Write abstract, introduction, methods, results, discussion, conclusion
+- [x] Add references in APA 7 format (24 references)
+- [x] Prepare final figure/table set
+- [x] Prepare internship report and journal-style version
 
 Remaining:
 
-- [ ] Define held-out final test evaluation
-- [ ] Produce final metrics tables and final model comparison
-- [ ] Write abstract, introduction, methods, results, discussion, conclusion
-- [ ] Add references in APA 7 format
-- [ ] Prepare final figure/table set
-- [ ] Prepare internship report and journal-style version
+- [ ] Convert Markdown reports into DOCX using the BIP template format (Times New Roman, A4, 1.15 spacing)
+- [ ] Final proofread
 
 Exit criteria:
 

@@ -11,6 +11,8 @@ __pycache__/
 .venv/
 venv/
 
+android_build/
+
 # Large local datasets (not suitable for normal GitHub repo history)
 data/raw/
 data/processed/

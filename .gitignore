@@ -11,7 +11,34 @@ __pycache__/
 .venv/
 venv/
 
-android_build/
+android_build/*
+!android_build/PotatoLeafApp/
+!android_build/PotatoLeafApp/app/
+!android_build/PotatoLeafApp/app/build.gradle
+!android_build/PotatoLeafApp/app/proguard-rules.pro
+!android_build/PotatoLeafApp/app/src/
+!android_build/PotatoLeafApp/app/src/main/
+!android_build/PotatoLeafApp/app/src/main/**
+!android_build/PotatoLeafApp/build.gradle
+!android_build/PotatoLeafApp/settings.gradle
+!android_build/PotatoLeafApp/gradle.properties
+!android_build/PotatoLeafApp/gradlew
+!android_build/PotatoLeafApp/gradlew.bat
+!android_build/PotatoLeafApp/gradle/
+!android_build/PotatoLeafApp/gradle/wrapper/
+!android_build/PotatoLeafApp/gradle/wrapper/gradle-wrapper.jar
+!android_build/PotatoLeafApp/gradle/wrapper/gradle-wrapper.properties
+android_build/PotatoLeafApp/.gradle/
+android_build/PotatoLeafApp/.idea/
+android_build/PotatoLeafApp/build/
+android_build/PotatoLeafApp/app/build/
+android_build/PotatoLeafApp/local.properties
+android_build/PotatoLeafApp/nul
+android_build/cmdline-tools/
+android_build/sdk/
+android_build/gradle-*/
+android_build/*.zip
+nul
 
 # Large local datasets (not suitable for normal GitHub repo history)
 data/raw/
@@ -22,6 +49,16 @@ artifacts/**/models/*_best.pt
 !artifacts/phase_2_benchmarking/models/baseline_cnn_best.pt
 Potato_Leaf_Disease_Storage/
 *.onnx
+!android_build/PotatoLeafApp/app/src/main/assets/model.onnx
 
 # Optional local experiment clutter
 *.log
+
+# Local bundles / archives
+AdvancePractice/
+AdvancePractice.zip
+archives/
+
+# Additional large training artifacts
+artifacts/**/models/*_with_ood.pt
+artifacts/**/models/leaf_centroids.pt

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Potato Leaf Disease</string>
+    <string name="subtitle_text">Hybrid CNN-Transformer - 7 disease classes</string>
+    <string name="image_preview_content_description">Leaf image preview</string>
+    <string name="placeholder_text">Tap a button below to capture or select a leaf image</string>
+    <string name="camera_button">Camera</string>
+    <string name="gallery_button">Gallery</string>
+    <string name="gallery_chooser_title">Choose leaf image source</string>
+    <string name="prediction_result_title">Prediction Result</string>
+    <string name="top_predictions_title">Top-3 Predictions</string>
+    <string name="model_info_footer" formatted="false">Model: Hybrid CNN-Transformer (EfficientNetB0 + 2-layer Transformer)\nDataset: Potato Leaf Disease in Uncontrolled Environment\nAccuracy: 81.26% | Macro-F1: 82.06%\n(c) 2026 Muhammad Bilal Asghar | Teesside University</string>
+</resources>

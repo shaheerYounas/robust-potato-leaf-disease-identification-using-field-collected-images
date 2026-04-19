@@ -287,6 +287,30 @@ def convert_md_to_docx(md_path, docx_path):
             i += 1
             continue
 
+        # Image line ![alt](path)
+        img_match = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', line.strip())
+        if img_match:
+            alt_text = img_match.group(1)
+            img_path_str = img_match.group(2)
+            md_dir = Path(md_path).resolve().parent
+            resolved = (md_dir / img_path_str).resolve()
+            if resolved.exists():
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                run = p.add_run()
+                run.add_picture(str(resolved), width=Cm(16))
+                p.paragraph_format.line_spacing = 1.15
+                if alt_text:
+                    cap = doc.add_paragraph()
+                    cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    cap_run = cap.add_run(alt_text)
+                    cap_run.font.size = Pt(10)
+                    cap_run.font.name = "Times New Roman"
+                    cap.paragraph_format.line_spacing = 1.15
+                    cap.paragraph_format.space_after = Pt(6)
+            i += 1
+            continue
+
         # Regular paragraph
         add_body_paragraph(doc, line.strip())
         i += 1
@@ -303,14 +327,14 @@ def convert_md_to_docx(md_path, docx_path):
 
 if __name__ == "__main__":
     base = Path(__file__).resolve().parent.parent
-    reports_dir = base / "submission_ready" / "final_package" / "reports"
+    reports_dir = base / "docs" / "final_reports"
 
     convert_md_to_docx(
-        reports_dir / "internship_report_submission.md",
-        reports_dir / "internship_report_submission.docx",
+        reports_dir / "internship_report.md",
+        reports_dir / "internship_report.docx",
     )
     convert_md_to_docx(
-        reports_dir / "journal_paper_submission.md",
-        reports_dir / "journal_paper_submission.docx",
+        reports_dir / "journal_paper.md",
+        reports_dir / "journal_paper.docx",
     )
     print("Done — both DOCX files generated.")

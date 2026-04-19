@@ -1,6 +1,0 @@
-condition,accuracy,f1_macro,precision_macro,recall_macro,latency_ms,accuracy_drop_vs_clean,f1_drop_vs_clean
-Clean (Test Set),0.9251,0.9288,0.9264,0.9328,0.964,0.0,0.0
-Gaussian Blur,0.9119,0.9186,0.9149,0.9245,0.963,0.0132,0.0102
-Low Light,0.8172,0.8297,0.834,0.8496,0.96,0.1079,0.0991
-Gaussian Noise,0.9273,0.9301,0.9295,0.9318,0.961,-0.0022,-0.0013
-Center Occlusion,0.8348,0.8421,0.8303,0.8622,0.963,0.0903,0.0867

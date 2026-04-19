@@ -1,9 +1,0 @@
-item,value
-split_used,test holdout (70/15/15 train/val/test)
-train_balancing,in-memory balancing to 748 samples per class
-selection_rule,"macro-F1 desc, accuracy desc, latency asc"
-selection_metrics,"f1_macro, accuracy, latency_ms"
-locked_model,EfficientNetB0 (fine-tune)
-test_sample_count,454
-class_count,7
-random_seed,42

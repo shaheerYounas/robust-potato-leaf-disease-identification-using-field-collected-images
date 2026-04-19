@@ -28,6 +28,11 @@ tqdm==4.67.3
 # ── Deployment ─────────────────────────────────────────────────────────────────
 streamlit>=1.30.0
 
+# ── Explainability & Optimization (optional — install as needed) ──────────────
+# pip install onnxruntime            # for INT8 quantization & ONNX inference
+# pip install tensorrt               # for TensorRT conversion (NVIDIA GPU only)
+# pip install pycuda                 # for TensorRT benchmarking
+
 # ── Utilities ─────────────────────────────────────────────────────────────────
 huggingface_hub==1.5.0
 safetensors==0.7.0

@@ -35,10 +35,10 @@ Source:
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) |
 |---|---:|---:|---:|
-| EfficientNetB0 (fine-tuned) | 0.9251 | 0.9288 | 1.282 |
-| Hybrid CNN-Transformer | 0.9031 | 0.9079 | 1.325 |
-| EfficientNetB0 (frozen) | 0.7489 | 0.7359 | 1.036 |
-| Baseline CNN | 0.6454 | 0.6492 | 1.068 |
+| Hybrid CNN-Transformer | 0.8671 | 0.8679 | 1.339 |
+| EfficientNetB0 (fine-tuned) | 0.8453 | 0.8494 | 1.279 |
+| EfficientNetB0 (frozen) | 0.7124 | 0.7062 | 1.134 |
+| Baseline CNN | 0.5294 | 0.54 | 1.063 |
 
 Source:
 - `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` (updated from latest Colab run)
@@ -47,23 +47,23 @@ Source:
 
 | Criterion | Best Model | Value |
 |---|---|---|
-| Macro-F1 (primary) | EfficientNetB0 (fine-tuned) | 0.9288 |
-| Accuracy | EfficientNetB0 (fine-tuned) | 0.9251 |
-| Latency | EfficientNetB0 (frozen) | 1.036 ms |
-| Locked selection | **EfficientNetB0 (fine-tuned)** | Highest macro-F1, highest accuracy |
+| Macro-F1 (primary) | Hybrid CNN-Transformer | 0.8679 |
+| Accuracy | Hybrid CNN-Transformer | 0.8671 |
+| Latency | Baseline CNN | 1.063 ms |
+| Locked selection | **Hybrid CNN-Transformer** | Highest macro-F1, highest accuracy |
 
 ## Table 5. Robustness Results
 
 | Condition | Accuracy | Macro-F1 | Accuracy Drop vs Clean | F1 Drop vs Clean |
 |---|---:|---:|---:|---:|
-| Clean (Test Set) | 0.9251 | 0.9288 | — | — |
-| Gaussian Blur | 0.9119 | 0.9186 | 0.0132 | 0.0102 |
-| Low Light | 0.8172 | 0.8297 | 0.1079 | 0.0991 |
-| Gaussian Noise | 0.9273 | 0.9301 | −0.0022 | −0.0013 |
-| Center Occlusion | 0.8348 | 0.8421 | 0.0903 | 0.0867 |
+| Clean (Test Set) | 0.8671 | 0.8679 | — | — |
+| Gaussian Blur | 0.8758 | 0.8848 | −0.0087 | −0.0169 |
+| Low Light | 0.8431 | 0.8497 | 0.0240 | 0.0182 |
+| Gaussian Noise | 0.8736 | 0.8762 | −0.0065 | −0.0083 |
+| Center Occlusion | 0.8235 | 0.8264 | 0.0436 | 0.0415 |
 
 Source:
-- `submission_ready/final_package/metrics/robustness_results.csv`
+- `AdvancePractice/metrics/robustness_results.csv`
 
 ## Table 6. Deployment Artifacts
 
@@ -72,7 +72,7 @@ Source:
 | Class metadata JSON (`class_info.json`) | Saved |
 | Sample single-image prediction JSON | Saved |
 | Prediction figure | Saved |
-| ONNX export | Skipped (missing `onnxscript` on Colab) |
+| ONNX export | Saved in `AdvancePractice/models/` |
 | Streamlit web app (`app.py`) | Ready |
 | CLI prediction tool (`predict.py`) | Ready |
 | Model version manifest | Saved |

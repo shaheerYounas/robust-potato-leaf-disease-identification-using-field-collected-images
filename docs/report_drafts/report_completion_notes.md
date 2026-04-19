@@ -8,16 +8,17 @@ All reports have been written, formatted, and exported. No remaining writing wor
 
 ## Final deliverables
 
-The canonical submission files live in `submission_ready/final_package/reports/`:
+The source-of-truth report files live in `docs/final_reports/`.
+Packaged submission copies live in `AdvancePractice/reports/`.
 
 | File | Format | Words | Refs | Notes |
 |---|---|---:|---:|---|
-| `internship_report_submission.md` | Markdown source | 5,017 | 24 | Primary report |
-| `internship_report_submission.docx` | DOCX (BIP template) | — | — | Times New Roman, A4, 1.15 spacing |
-| `internship_report_submission.pdf` | PDF | — | — | Generated via `scripts/md_to_pdf.py` |
-| `journal_paper_submission.md` | Markdown source | 2,135 | 18 | Shorter companion paper |
-| `journal_paper_submission.docx` | DOCX (BIP template) | — | — | Same template formatting |
-| `journal_paper_submission.pdf` | PDF | — | — | Generated via `scripts/md_to_pdf.py` |
+| `internship_report.md` | Markdown source | 5,017 | 24 | Primary report |
+| `internship_report.docx` | DOCX (BIP template) | — | — | Times New Roman, A4, 1.15 spacing |
+| `internship_report.pdf` | PDF | — | — | Generated via `scripts/md_to_pdf.py` for the packaged copy |
+| `journal_paper.md` | Markdown source | 2,135 | 18 | Shorter companion paper |
+| `journal_paper.docx` | DOCX (BIP template) | — | — | Same template formatting |
+| `journal_paper.pdf` | PDF | — | — | Generated for the packaged copy |
 
 ## What was done
 
@@ -36,6 +37,6 @@ Mirror copies are kept in `docs/report_drafts/` for convenience:
 
 ## Data integrity note
 
-- Final metrics come from the executed notebook Sections 7–11, packaged in `submission_ready/final_package/metrics/`.
+- Final metrics come from the executed notebook Sections 7–11 and are packaged in `AdvancePractice/metrics/`.
 - The earlier `artifacts/phase_2_benchmarking/metrics/benchmarking_results.csv` is preserved for traceability.
 - All numbers in the reports match the locked evaluation protocol values.

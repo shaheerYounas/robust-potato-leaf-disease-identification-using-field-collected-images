@@ -12,6 +12,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, StyleSheet1, getSampleStyleSheet
 from reportlab.lib.units import cm
 from reportlab.platypus import (
+    Image as RLImage,
     ListFlowable,
     ListItem,
     PageBreak,
@@ -285,7 +286,10 @@ def add_template_front_matter(story, styles: StyleSheet1, metadata: argparse.Nam
         story.append(Spacer(1, 0.15 * cm))
 
 
-def build_story(md_text: str, styles: StyleSheet1, template_mode: bool, metadata: argparse.Namespace):
+IMAGE_RE = re.compile(r"^!\[([^\]]*)\]\(([^)]+)\)$")
+
+
+def build_story(md_text: str, styles: StyleSheet1, template_mode: bool, metadata: argparse.Namespace, md_dir: Path | None = None):
     story = []
     lines = md_text.splitlines()
     i = 0
@@ -391,6 +395,26 @@ def build_story(md_text: str, styles: StyleSheet1, template_mode: bool, metadata
             story.append(Spacer(1, 0.08 * cm))
             continue
 
+        img_match = IMAGE_RE.match(stripped)
+        if img_match:
+            alt_text = img_match.group(1)
+            img_path = img_match.group(2)
+            if md_dir:
+                resolved = (md_dir / img_path).resolve()
+            else:
+                resolved = Path(img_path).resolve()
+            if resolved.exists():
+                avail_width = (21 - 2.49 - 2.01) * cm  # A4 minus margins
+                max_height = 18 * cm  # reasonable max height
+                story.append(Spacer(1, 0.2 * cm))
+                story.append(RLImage(str(resolved), width=avail_width, height=max_height, kind="proportional", hAlign="CENTER"))
+                if alt_text:
+                    story.append(Spacer(1, 0.1 * cm))
+                    story.append(paragraph(alt_text, styles["ReportMetaCenter"]))
+                story.append(Spacer(1, 0.2 * cm))
+            i += 1
+            continue
+
         para_lines = [stripped]
         i += 1
         while i < len(lines):
@@ -435,7 +459,7 @@ def convert_markdown_to_pdf(src: Path, dst: Path, template_mode: bool, metadata:
             author="OpenAI Codex",
         )
 
-    story = build_story(src.read_text(encoding="utf-8"), styles, template_mode, metadata)
+    story = build_story(src.read_text(encoding="utf-8"), styles, template_mode, metadata, md_dir=src.parent)
     doc.build(story)
 
 

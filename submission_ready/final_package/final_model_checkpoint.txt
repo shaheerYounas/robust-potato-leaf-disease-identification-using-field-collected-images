@@ -1,1 +1,0 @@
-C:\Users\Shaheer\Desktop\Bilal-Advance Practice\artifacts\phase_2_benchmarking\models\efficientnet_b0_finetune_best.pt

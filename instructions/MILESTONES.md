@@ -73,10 +73,10 @@ Robust Potato Leaf Disease Identification Using Field-Collected Images
 
 | Model | Accuracy | Macro-F1 | Latency (ms/image) | Status |
 |---|---:|---:|---:|---|
-| EfficientNetB0 fine-tune | 0.9251 | 0.9288 | 1.282 | Final selected model |
-| Hybrid CNN-Transformer | 0.9031 | 0.9079 | 1.325 | Saved locally |
-| EfficientNetB0 frozen | 0.7489 | 0.7359 | 1.036 | Saved locally |
-| Baseline CNN | 0.6454 | 0.6492 | 1.068 | Saved locally |
+| Hybrid CNN-Transformer | 0.8671 | 0.8679 | 1.339 | Final selected model |
+| EfficientNetB0 fine-tune | 0.8453 | 0.8494 | 1.279 | Saved locally |
+| EfficientNetB0 frozen | 0.7124 | 0.7062 | 1.134 | Saved locally |
+| Baseline CNN | 0.5294 | 0.54 | 1.063 | Saved locally |
 
 ## Milestones
 

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<b:Sources SelectedStyle="" xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography">
+  <b:Source>
+    <b:Tag>AlNoman2025</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Al-Noman</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Ifti</b:Last><b:First>I. S.</b:First></b:Person>
+      <b:Person><b:Last>Debi</b:Last><b:First>C. R.</b:First></b:Person>
+      <b:Person><b:Last>Khaliluzzaman</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Hassan</b:Last><b:First>M.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>A YOLO-assisted framework for potato leaf disease detection and classification using CNN and multi-head attention mechanism</b:Title>
+    <b:Year>2025</b:Year>
+    <b:ConferenceName>2025 International Conference on Electrical, Computer and Communication Engineering (ECCE)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>1-6</b:Pages>
+    <b:StandardNumber>10.1109/ecce64574.2025.11013219</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/ecce64574.2025.11013219</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Austin2025</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Austin</b:Last><b:First>S.</b:First></b:Person>
+      <b:Person><b:Last>Barua</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Haider</b:Last><b:First>S. N.</b:First></b:Person>
+      <b:Person><b:Last>Niha</b:Last><b:First>F. L.</b:First></b:Person>
+      <b:Person><b:Last>Faisal</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Shawon</b:Last><b:First>S. M.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Precision classification of potato diseases using transformer-enhanced CNNs</b:Title>
+    <b:Year>2025</b:Year>
+    <b:ConferenceName>2025 International Conference on Quantum Photonics, Artificial Intelligence, and Networking (QPAIN)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>1-6</b:Pages>
+    <b:StandardNumber>10.1109/qpain66474.2025.11172153</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/qpain66474.2025.11172153</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Bhavani2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Bhavani</b:Last><b:First>G. D.</b:First></b:Person>
+      <b:Person><b:Last>Chalapathi</b:Last><b:First>M. M. V.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>PotatoLeafNet: two-stage convolutional neural networks for effective Potato Leaf disease identification and classification</b:Title>
+    <b:Year>2026</b:Year>
+    <b:JournalName>Frontiers in Artificial Intelligence</b:JournalName>
+    <b:Volume>8</b:Volume>
+    <b:Pages>1668839</b:Pages>
+    <b:StandardNumber>10.3389/frai.2025.1668839</b:StandardNumber>
+    <b:URL>https://doi.org/10.3389/frai.2025.1668839</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Boukhlifa2024</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Boukhlifa</b:Last><b:First>G.</b:First></b:Person>
+      <b:Person><b:Last>Chibani</b:Last><b:First>Y.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>DSCSkipNet: An accuracy-complexity trade-off for effective potato disease identification in uncontrolled environments</b:Title>
+    <b:Year>2024</b:Year>
+    <b:ConferenceName>2024 4th International Conference on Embedded &amp; Distributed Systems (EDiS)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>267-272</b:Pages>
+    <b:StandardNumber>10.1109/edis63605.2024.10783376</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/edis63605.2024.10783376</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Chang2024</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Chang</b:Last><b:First>C.-Y.</b:First></b:Person>
+      <b:Person><b:Last>Lai</b:Last><b:First>C.-C.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Potato leaf disease detection based on a lightweight deep learning model</b:Title>
+    <b:Year>2024</b:Year>
+    <b:JournalName>Machine Learning and Knowledge Extraction</b:JournalName>
+    <b:Volume>6</b:Volume>
+    <b:Issue>4</b:Issue>
+    <b:Pages>2321-2335</b:Pages>
+    <b:StandardNumber>10.3390/make6040114</b:StandardNumber>
+    <b:URL>https://doi.org/10.3390/make6040114</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Chowdhury2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Chowdhury</b:Last><b:First>S.</b:First></b:Person>
+      <b:Person><b:Last>Das</b:Last><b:First>D. K.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Harnessing the potato leaf disease detection process through proposed Conv2D and ResNet50 deep learning models</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Procedia Computer Science</b:JournalName>
+    <b:Volume>252</b:Volume>
+    <b:Pages>539-547</b:Pages>
+    <b:StandardNumber>10.1016/j.procs.2025.01.013</b:StandardNumber>
+    <b:URL>https://doi.org/10.1016/j.procs.2025.01.013</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Devaux2021</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Devaux</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Goffart</b:Last><b:First>J. P.</b:First></b:Person>
+      <b:Person><b:Last>Kromann</b:Last><b:First>P.</b:First></b:Person>
+      <b:Person><b:Last>Andrade-Piedra</b:Last><b:First>J.</b:First></b:Person>
+      <b:Person><b:Last>Polar</b:Last><b:First>V.</b:First></b:Person>
+      <b:Person><b:Last>Hareau</b:Last><b:First>G.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>The potato of the future: Opportunities and challenges in sustainable agri-food systems</b:Title>
+    <b:Year>2021</b:Year>
+    <b:JournalName>Potato Research</b:JournalName>
+    <b:Volume>64</b:Volume>
+    <b:Issue>4</b:Issue>
+    <b:Pages>681-720</b:Pages>
+    <b:StandardNumber>10.1007/s11540-021-09501-4</b:StandardNumber>
+    <b:URL>https://doi.org/10.1007/s11540-021-09501-4</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Dey2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Dey</b:Last><b:First>B.</b:First></b:Person>
+      <b:Person><b:Last>Ahmed</b:Last><b:First>R.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>A comprehensive review of AI-driven plant stress monitoring and embedded sensor technology: Agriculture 5.0</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Journal of Industrial Information Integration</b:JournalName>
+    <b:Volume>47</b:Volume>
+    <b:Pages>100931</b:Pages>
+    <b:StandardNumber>10.1016/j.jii.2025.100931</b:StandardNumber>
+    <b:URL>https://doi.org/10.1016/j.jii.2025.100931</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Fathima2024</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Fathima</b:Last><b:First>M. S.</b:First></b:Person>
+      <b:Person><b:Last>Booba</b:Last><b:First>B.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Enhancing plant leaf disease detection: Integrating MobileNet with local binary pattern and visualizing insights with Grad-CAM</b:Title>
+    <b:Year>2024</b:Year>
+    <b:ConferenceName>2024 7th International Conference on Circuit Power and Computing Technologies (ICCPCT)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>1400-1404</b:Pages>
+    <b:StandardNumber>10.1109/iccpct61902.2024.10673312</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/iccpct61902.2024.10673312</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Mondal2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Mondal</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Chatterjee</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Avazov</b:Last><b:First>N.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>A hybrid CNN-transformer model with adaptive activation function for potato leaf disease classification</b:Title>
+    <b:Year>2026</b:Year>
+    <b:JournalName>Scientific Reports</b:JournalName>
+    <b:Volume>16</b:Volume>
+    <b:Issue>1</b:Issue>
+    <b:Pages>4282</b:Pages>
+    <b:StandardNumber>10.1038/s41598-025-34406-4</b:StandardNumber>
+    <b:URL>https://doi.org/10.1038/s41598-025-34406-4</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Palei2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Palei</b:Last><b:First>S.</b:First></b:Person>
+      <b:Person><b:Last>Mohapatra</b:Last><b:First>P.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Cutting-edge approaches to plant disease detection: A survey of machine learning models and optimization methods</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Journal of Ambient Intelligence and Humanized Computing</b:JournalName>
+    <b:Volume>16</b:Volume>
+    <b:Issue>10</b:Issue>
+    <b:Pages>1073-1086</b:Pages>
+    <b:StandardNumber>10.1007/s12652-025-05000-3</b:StandardNumber>
+    <b:URL>https://doi.org/10.1007/s12652-025-05000-3</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Richter2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Richter</b:Last><b:First>D. J.</b:First></b:Person>
+      <b:Person><b:Last>Kim</b:Last><b:First>K.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Assessing the performance of domain-specific models for plant leaf disease classification: a comprehensive benchmark of transfer-learning on open datasets</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Scientific Reports</b:JournalName>
+    <b:Volume>15</b:Volume>
+    <b:Issue>1</b:Issue>
+    <b:Pages>18973</b:Pages>
+    <b:StandardNumber>10.1038/s41598-025-03235-w</b:StandardNumber>
+    <b:URL>https://doi.org/10.1038/s41598-025-03235-w</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Rifqi2024</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Rifqi</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Rahardi</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Aminuddin</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Abdulloh</b:Last><b:First>A.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Comparison of convolutional neural network and MobileNetV2 for potato leaf disease detection</b:Title>
+    <b:Year>2024</b:Year>
+    <b:ConferenceName>2024 International Conference on Information Technology Systems and Innovation (ICITSI)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>77-82</b:Pages>
+    <b:StandardNumber>10.1109/icitsi65188.2024.10929413</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/icitsi65188.2024.10929413</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Rivaldo2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Rivaldo</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Udjulawa</b:Last><b:First>D.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Performance comparison of EfficientNetB0 in potato leaf disease classification with Adam and SGD</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Brilliance: Research of Artificial Intelligence</b:JournalName>
+    <b:Volume>5</b:Volume>
+    <b:Issue>2</b:Issue>
+    <b:Pages>1224-1231</b:Pages>
+    <b:StandardNumber>10.47709/brilliance.v5i2.7482</b:StandardNumber>
+    <b:URL>https://doi.org/10.47709/brilliance.v5i2.7482</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Saleh2025</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Saleh</b:Last><b:First>H.</b:First></b:Person>
+      <b:Person><b:Last>McCann</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Creaven</b:Last><b:First>S.</b:First></b:Person>
+      <b:Person><b:Last>Breslin</b:Last><b:First>J.</b:First></b:Person>
+      <b:Person><b:Last>El-Sappagh</b:Last><b:First>S.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Hybrid CNN-Swin framework for detection and classification of potato leaf diseases</b:Title>
+    <b:Year>2025</b:Year>
+    <b:ConferenceName>2025 35th Irish Signals and Systems Conference (ISSC)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>1-6</b:Pages>
+    <b:StandardNumber>10.1109/issc67739.2025.11291558</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/issc67739.2025.11291558</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Sangar2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Sangar</b:Last><b:First>G.</b:First></b:Person>
+      <b:Person><b:Last>Rajasekar</b:Last><b:First>V.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Optimized classification of potato leaf disease using EfficientNet-LITE and KE-SVM in diverse environments</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Frontiers in Plant Science</b:JournalName>
+    <b:Volume>16</b:Volume>
+    <b:Pages>1499909</b:Pages>
+    <b:StandardNumber>10.3389/fpls.2025.1499909</b:StandardNumber>
+    <b:URL>https://doi.org/10.3389/fpls.2025.1499909</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Selvaraju2017</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Selvaraju</b:Last><b:First>R. R.</b:First></b:Person>
+      <b:Person><b:Last>Cogswell</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Das</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Vedantam</b:Last><b:First>R.</b:First></b:Person>
+      <b:Person><b:Last>Parikh</b:Last><b:First>D.</b:First></b:Person>
+      <b:Person><b:Last>Batra</b:Last><b:First>D.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Grad-CAM: Visual explanations from deep networks via gradient-based localization</b:Title>
+    <b:Year>2017</b:Year>
+    <b:ConferenceName>2017 IEEE International Conference on Computer Vision (ICCV)</b:ConferenceName>
+    <b:Pages>618-626</b:Pages>
+    <b:StandardNumber>10.1109/ICCV.2017.74</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/ICCV.2017.74</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Shabrina2023</b:Tag>
+    <b:SourceType>Misc</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Shabrina</b:Last><b:First>N. H.</b:First></b:Person>
+      <b:Person><b:Last>Indarti</b:Last><b:First>S.</b:First></b:Person>
+      <b:Person><b:Last>Maharani</b:Last><b:First>R.</b:First></b:Person>
+      <b:Person><b:Last>Kristiyanti</b:Last><b:First>D. A.</b:First></b:Person>
+      <b:Person><b:Last>Irmawati</b:Last><b:First>I.</b:First></b:Person>
+      <b:Person><b:Last>Prastomo</b:Last><b:First>N.</b:First></b:Person>
+      <b:Person><b:Last>M</b:Last><b:First>T. A.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Potato leaf disease dataset in uncontrolled environment</b:Title>
+    <b:Year>2023</b:Year>
+    <b:Publisher>Mendeley Data</b:Publisher>
+    <b:Comments>V1</b:Comments>
+    <b:StandardNumber>10.17632/ptz377bwb8.1</b:StandardNumber>
+    <b:URL>https://doi.org/10.17632/ptz377bwb8.1</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Sinamenye2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Sinamenye</b:Last><b:First>J. H.</b:First></b:Person>
+      <b:Person><b:Last>Chatterjee</b:Last><b:First>A.</b:First></b:Person>
+      <b:Person><b:Last>Shrestha</b:Last><b:First>R.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Potato plant disease detection: Leveraging hybrid deep learning models</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>BMC Plant Biology</b:JournalName>
+    <b:Volume>25</b:Volume>
+    <b:Issue>1</b:Issue>
+    <b:Pages>647</b:Pages>
+    <b:StandardNumber>10.1186/s12870-025-06679-4</b:StandardNumber>
+    <b:URL>https://doi.org/10.1186/s12870-025-06679-4</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Tariq2025</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Tariq</b:Last><b:First>M. H.</b:First></b:Person>
+      <b:Person><b:Last>Sultan</b:Last><b:First>H.</b:First></b:Person>
+      <b:Person><b:Last>Akram</b:Last><b:First>R.</b:First></b:Person>
+      <b:Person><b:Last>Kim</b:Last><b:First>S. G.</b:First></b:Person>
+      <b:Person><b:Last>Kim</b:Last><b:First>J. S.</b:First></b:Person>
+      <b:Person><b:Last>Usman</b:Last><b:First>M.</b:First></b:Person>
+      <b:Person><b:Last>Gondal</b:Last><b:First>M. A.</b:First></b:Person>
+      <b:Person><b:Last>Seo</b:Last><b:First>H.</b:First></b:Person>
+      <b:Person><b:Last>Lee</b:Last><b:First>K.</b:First></b:Person>
+      <b:Person><b:Last>Park</b:Last><b:First>J.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>Estimation of fractal dimensions and classification of plant disease with complex backgrounds</b:Title>
+    <b:Year>2025</b:Year>
+    <b:JournalName>Fractal and Fractional</b:JournalName>
+    <b:Volume>9</b:Volume>
+    <b:Issue>5</b:Issue>
+    <b:Pages>315</b:Pages>
+    <b:StandardNumber>10.3390/fractalfract9050315</b:StandardNumber>
+    <b:URL>https://doi.org/10.3390/fractalfract9050315</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Vitasoa2025</b:Tag>
+    <b:SourceType>ConferenceProceedings</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Vitasoa</b:Last><b:First>D. C.</b:First></b:Person>
+      <b:Person><b:Last>Randriamitsiry</b:Last><b:First>P. M.</b:First></b:Person>
+      <b:Person><b:Last>Razafimahatratra</b:Last><b:First>T.</b:First></b:Person>
+      <b:Person><b:Last>Mahatody</b:Last><b:First>T.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>DenseSwinNet: A hybrid CNN-transformer model for robust classification in uncontrolled environments</b:Title>
+    <b:Year>2025</b:Year>
+    <b:ConferenceName>2025 29th International Conference on System Theory, Control and Computing (ICSTCC)</b:ConferenceName>
+    <b:Publisher>IEEE</b:Publisher>
+    <b:Pages>324-331</b:Pages>
+    <b:StandardNumber>10.1109/icstcc66753.2025.11240329</b:StandardNumber>
+    <b:URL>https://doi.org/10.1109/icstcc66753.2025.11240329</b:URL>
+  </b:Source>
+
+  <b:Source>
+    <b:Tag>Wang2024</b:Tag>
+    <b:SourceType>JournalArticle</b:SourceType>
+    <b:Author><b:Author><b:NameList>
+      <b:Person><b:Last>Wang</b:Last><b:First>R.-F.</b:First></b:Person>
+      <b:Person><b:Last>Su</b:Last><b:First>W.-H.</b:First></b:Person>
+    </b:NameList></b:Author></b:Author>
+    <b:Title>The application of deep learning in the whole potato production chain: A comprehensive review</b:Title>
+    <b:Year>2024</b:Year>
+    <b:JournalName>Agriculture</b:JournalName>
+    <b:Volume>14</b:Volume>
+    <b:Issue>8</b:Issue>
+    <b:Pages>1225</b:Pages>
+    <b:StandardNumber>10.3390/agriculture14081225</b:StandardNumber>
+    <b:URL>https://doi.org/10.3390/agriculture14081225</b:URL>
+  </b:Source>
+</b:Sources>

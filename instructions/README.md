@@ -8,15 +8,15 @@ This folder is the project control center for planning, reference material, and 
 - Original brief: `docs/project_brief/Project Description UMN X Teeside 2026 - Nabila.pdf`
 - Final report template: `docs/project_brief/Final Report Template.docx`
 - Proposed method: `docs/project_brief/Proposed_Method.txt`
-- GPU setup notes: `SETUP_ON_GPU_MACHINE.txt`
+- GPU setup notes: `docs/setup/SETUP_ON_GPU_MACHINE.txt`
 - Python environment: `requirements.txt`
 
 ## How To Use This Workspace
 
 1. Read `instructions/MILESTONES.md` before starting new work.
-2. Use `in_progress/README.md` for the current execution focus.
-3. Use `completed/README.md` to confirm what already exists.
-4. Use `submission_ready/README.md` to track the final deliverables package.
+2. Use `docs/project_brief/` as the evaluation source of truth.
+3. Use `docs/final_reports/` for the final report source files.
+4. Use `AdvancePractice/` for the packaged submission copy.
 
 ## Organization Rule
 

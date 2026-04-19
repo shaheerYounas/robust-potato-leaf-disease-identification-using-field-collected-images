@@ -1,85 +1,109 @@
-# Deployment Guide — Potato Leaf Disease Classification
+# Deployment Guide - Potato Leaf Disease Classification
 
-## Quick Start
+## Overview
 
-### 1. Environment Setup
+The project has two active deployment targets:
 
-```bash
-# Create virtual environment
-python -m venv .venv
+- Python deployment from the repository root
+- Android deployment packaged in `AdvancePractice/PotatoLeafDisease.apk`
 
-# Activate (Windows)
-.venv\Scripts\activate
+The Python inference wrapper uses a 3-stage safety flow:
 
-# Install dependencies
-pip install -r requirements.txt
+1. `leaf_gate`
+   Rejects obvious non-leaf / non-vegetation inputs.
+2. `imagenet_label`
+   Adds a human-readable object hint for rejected or uncertain cases.
+3. `confidence_gate`
+   Returns `Uncertain` for ambiguous leaf-like images instead of forcing a disease label.
 
-# Install PyTorch with CUDA 12.1 (adjust for your GPU)
-pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 --index-url https://download.pytorch.org/whl/cu121
-
-# CPU-only alternative
-pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cpu
-```
-
-### 2. Required Files
+## Required Files
 
 | File | Purpose |
 |---|---|
-| `artifacts/phase_2_benchmarking/models/efficientnet_b0_finetune_best.pt` | Model weights (~32 MB) |
-| `submission_ready/final_package/deployment/class_info.json` | Class names + disease descriptions |
-| `potato_leaf_inference.py` | Core inference module |
+| `artifacts/phase_2_benchmarking/models/hybrid_cnn_transformer_best.pt` | Final PyTorch checkpoint |
+| `AdvancePractice/deployment/class_info.json` | Class metadata and gate configuration |
+| `artifacts/phase_2_benchmarking/models/leaf_centroids.pt` | Leaf-gate centroids |
+| `potato_leaf_inference.py` | Core inference pipeline |
+| `predict.py` | CLI inference entry point |
+| `app.py` | Streamlit web app |
+| `explainability.py` | Optional Grad-CAM / Score-CAM visual explanations |
 
-### 3. Run the Web App (Streamlit)
+## Environment Setup
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# GPU example
+pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 --index-url https://download.pytorch.org/whl/cu121
+
+# CPU-only example
+pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cpu
+```
+
+## Run The Web App
 
 ```bash
 streamlit run app.py
 ```
 
-- Upload a JPG/PNG/BMP/WebP leaf image
-- Displays top-k predictions with confidence scores and disease descriptions
-- Automatically warns on low-light or overexposed images
+The web app supports:
 
-### 4. Run CLI Inference
+- top-k disease predictions
+- low-light and overexposure warnings
+- non-leaf rejection feedback
+- uncertain-image handling
+- optional Grad-CAM / Score-CAM overlays for accepted predictions
+
+## Run The CLI
 
 ```bash
-# Basic usage
 python predict.py path/to/leaf_image.jpg
-
-# With options
-python predict.py path/to/leaf_image.jpg --top-k 5 --device cuda --json-out result.json
+python predict.py path/to/leaf_image.jpg --top-k 5 --device cpu --json-out result.json
 ```
 
-### 5. Use as a Python Module
+## Python Usage
 
 ```python
-from potato_leaf_inference import load_model, predict_image, predict_pil_image, check_image_brightness
 from PIL import Image
 
-# Load model (auto-detects GPU)
+from potato_leaf_inference import load_gate_model, load_model, predict_pil_image
+
 model, device, info = load_model()
+gate_model, gate_categories = load_gate_model(device)
 
-# Predict from file path
-result = predict_image("leaf.jpg", model, device, info["class_names"], info["disease_info"])
-
-# Predict from PIL image
-img = Image.open("leaf.jpg")
-result = predict_pil_image(img, model, device, info["class_names"], info["disease_info"])
-
-# Check brightness before inference
-brightness = check_image_brightness(img)
-if brightness["level"] != "OK":
-    print(f"Warning: {brightness['message']}")
+img = Image.open("leaf.jpg").convert("RGB")
+result = predict_pil_image(
+    img,
+    model=model,
+    device=device,
+    class_names=info["class_names"],
+    disease_info=info["disease_info"],
+    centroids_data=info.get("_centroids"),
+    gate_model=gate_model,
+    gate_categories=gate_categories,
+)
 ```
+
+## Output Types
+
+- Accepted disease prediction:
+  Returns one of `Bacteria`, `Fungi`, `Healthy`, `Nematode`, `Pest`, `Phytopthora`, or `Virus`.
+- Hard rejection:
+  Returns `Not a Potato Leaf` with a rejection reason and detected object label.
+- Soft rejection:
+  Returns `Uncertain` with `best_guess`, confidence, and rejection reason.
 
 ## Model Details
 
-- **Architecture:** EfficientNetB0 (fine-tuned last 2 blocks) + custom classifier head
-- **Input:** 224 × 224 RGB, ImageNet-normalised
-- **Output:** 7-class softmax (Bacteria, Fungi, Healthy, Nematode, Pest, Phytopthora, Virus)
-- **Latency:** ~1.3 ms/image (GPU), ~82 ms/image (CPU)
+- **Architecture:** Hybrid CNN-Transformer
+- **Input:** 224 x 224 RGB, ImageNet-normalized
+- **Output:** 7 disease classes plus rejection / uncertainty handling in the inference wrapper
+- **Latency:** 1.339 ms/image (GPU), 35.85 ms/image (CPU)
 
-## Known Limitations
+## Extra Artifacts
 
-- **Low-light images:** 9.91% F1 drop under dimmed conditions — brightness validation warns users automatically
-- **Single dataset:** Trained on Mendeley Potato Leaf Disease dataset only; cross-dataset generalisation untested
-- **No mobile optimisation:** ONNX export available but INT8 quantisation not verified
+- Final handoff package: `AdvancePractice/`
+- Android APK: `AdvancePractice/PotatoLeafDisease.apk`
+- ONNX export: `AdvancePractice/models/hybrid_cnn_transformer.onnx`

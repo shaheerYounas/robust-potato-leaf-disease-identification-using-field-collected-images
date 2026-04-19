@@ -1,7 +1,0 @@
-# Extra packages for the standalone submission demo layer.
-# Install after the main notebook requirements:
-#   pip install -r requirements.txt -r submission_ready/requirements_submission.txt
-
-streamlit
-onnx
-onnxscript

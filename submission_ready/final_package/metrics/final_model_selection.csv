@@ -1,2 +1,0 @@
-model,accuracy,f1_macro,latency_ms
-EfficientNetB0 (fine-tune),0.9251,0.9288,1.282
